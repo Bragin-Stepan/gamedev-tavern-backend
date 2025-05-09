@@ -126,12 +126,13 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  statusTeam: 'statusTeam',
+  isLookingTeam: 'isLookingTeam',
+  isGatheringTeam: 'isGatheringTeam',
   username: 'username',
   status: 'status',
   avatar: 'avatar',
-  iconSpecialization: 'iconSpecialization',
   specializationId: 'specializationId',
+  iconSpecialization: 'iconSpecialization',
   isVerified: 'isVerified',
   isEmailVerified: 'isEmailVerified',
   isDeactivated: 'isDeactivated',
@@ -232,7 +233,7 @@ exports.Prisma.SocialLinkScalarFieldEnum = {
 exports.Prisma.SpecializationScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  route: 'route',
+  careerPath: 'careerPath',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -305,18 +306,13 @@ exports.RoleType = exports.$Enums.RoleType = {
   USER: 'USER'
 };
 
-exports.StatusTeamType = exports.$Enums.StatusTeamType = {
-  FINDING: 'FINDING',
-  GATHERING: 'GATHERING'
-};
-
 exports.TargetContentType = exports.$Enums.TargetContentType = {
   PROJECT: 'PROJECT',
   TOPIC: 'TOPIC',
   CANDIDATE_CARD: 'CANDIDATE_CARD'
 };
 
-exports.RouteSpecializationType = exports.$Enums.RouteSpecializationType = {
+exports.PathCareerType = exports.$Enums.PathCareerType = {
   ART: 'ART',
   DEVELOPER: 'DEVELOPER',
   MANAGER: 'MANAGER',

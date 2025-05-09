@@ -117,22 +117,14 @@ export const NotificationType: {
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
 
-export const RouteSpecializationType: {
+export const PathCareerType: {
   ART: 'ART',
   DEVELOPER: 'DEVELOPER',
   MANAGER: 'MANAGER',
   OTHER: 'OTHER'
 };
 
-export type RouteSpecializationType = (typeof RouteSpecializationType)[keyof typeof RouteSpecializationType]
-
-
-export const StatusTeamType: {
-  FINDING: 'FINDING',
-  GATHERING: 'GATHERING'
-};
-
-export type StatusTeamType = (typeof StatusTeamType)[keyof typeof StatusTeamType]
+export type PathCareerType = (typeof PathCareerType)[keyof typeof PathCareerType]
 
 
 export const RoleType: {
@@ -142,6 +134,14 @@ export const RoleType: {
 };
 
 export type RoleType = (typeof RoleType)[keyof typeof RoleType]
+
+
+export const LinkType: {
+  SOCIAL: 'SOCIAL',
+  PLATFORM: 'PLATFORM'
+};
+
+export type LinkType = (typeof LinkType)[keyof typeof LinkType]
 
 }
 
@@ -157,17 +157,17 @@ export type NotificationType = $Enums.NotificationType
 
 export const NotificationType: typeof $Enums.NotificationType
 
-export type RouteSpecializationType = $Enums.RouteSpecializationType
+export type PathCareerType = $Enums.PathCareerType
 
-export const RouteSpecializationType: typeof $Enums.RouteSpecializationType
-
-export type StatusTeamType = $Enums.StatusTeamType
-
-export const StatusTeamType: typeof $Enums.StatusTeamType
+export const PathCareerType: typeof $Enums.PathCareerType
 
 export type RoleType = $Enums.RoleType
 
 export const RoleType: typeof $Enums.RoleType
+
+export type LinkType = $Enums.LinkType
+
+export const LinkType: typeof $Enums.LinkType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2290,7 +2290,7 @@ export namespace Prisma {
 
   export type ProjectCountOutputType = {
     topics: number
-    platforms: number
+    platformsLinks: number
     comments: number
     bookmarks: number
     views: number
@@ -2298,7 +2298,7 @@ export namespace Prisma {
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     topics?: boolean | ProjectCountOutputTypeCountTopicsArgs
-    platforms?: boolean | ProjectCountOutputTypeCountPlatformsArgs
+    platformsLinks?: boolean | ProjectCountOutputTypeCountPlatformsLinksArgs
     comments?: boolean | ProjectCountOutputTypeCountCommentsArgs
     bookmarks?: boolean | ProjectCountOutputTypeCountBookmarksArgs
     views?: boolean | ProjectCountOutputTypeCountViewsArgs
@@ -2325,7 +2325,7 @@ export namespace Prisma {
   /**
    * ProjectCountOutputType without action
    */
-  export type ProjectCountOutputTypeCountPlatformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProjectCountOutputTypeCountPlatformsLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlatformLinkWhereInput
   }
 
@@ -2505,12 +2505,13 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.RoleType | null
-    statusTeam: $Enums.StatusTeamType | null
+    isLookingTeam: boolean | null
+    isGatheringTeam: boolean | null
     username: string | null
     status: string | null
     avatar: string | null
-    iconSpecialization: string | null
     specializationId: string | null
+    iconSpecialization: string | null
     isVerified: boolean | null
     isEmailVerified: boolean | null
     isDeactivated: boolean | null
@@ -2525,12 +2526,13 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.RoleType | null
-    statusTeam: $Enums.StatusTeamType | null
+    isLookingTeam: boolean | null
+    isGatheringTeam: boolean | null
     username: string | null
     status: string | null
     avatar: string | null
-    iconSpecialization: string | null
     specializationId: string | null
+    iconSpecialization: string | null
     isVerified: boolean | null
     isEmailVerified: boolean | null
     isDeactivated: boolean | null
@@ -2545,12 +2547,13 @@ export namespace Prisma {
     email: number
     password: number
     role: number
-    statusTeam: number
+    isLookingTeam: number
+    isGatheringTeam: number
     username: number
     status: number
     avatar: number
-    iconSpecialization: number
     specializationId: number
+    iconSpecialization: number
     isVerified: number
     isEmailVerified: number
     isDeactivated: number
@@ -2575,12 +2578,13 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
-    statusTeam?: true
+    isLookingTeam?: true
+    isGatheringTeam?: true
     username?: true
     status?: true
     avatar?: true
-    iconSpecialization?: true
     specializationId?: true
+    iconSpecialization?: true
     isVerified?: true
     isEmailVerified?: true
     isDeactivated?: true
@@ -2595,12 +2599,13 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
-    statusTeam?: true
+    isLookingTeam?: true
+    isGatheringTeam?: true
     username?: true
     status?: true
     avatar?: true
-    iconSpecialization?: true
     specializationId?: true
+    iconSpecialization?: true
     isVerified?: true
     isEmailVerified?: true
     isDeactivated?: true
@@ -2615,12 +2620,13 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
-    statusTeam?: true
+    isLookingTeam?: true
+    isGatheringTeam?: true
     username?: true
     status?: true
     avatar?: true
-    iconSpecialization?: true
     specializationId?: true
+    iconSpecialization?: true
     isVerified?: true
     isEmailVerified?: true
     isDeactivated?: true
@@ -2722,12 +2728,13 @@ export namespace Prisma {
     email: string
     password: string
     role: $Enums.RoleType
-    statusTeam: $Enums.StatusTeamType | null
+    isLookingTeam: boolean
+    isGatheringTeam: boolean
     username: string | null
     status: string | null
     avatar: string | null
-    iconSpecialization: string | null
     specializationId: string | null
+    iconSpecialization: string | null
     isVerified: boolean
     isEmailVerified: boolean
     isDeactivated: boolean
@@ -2761,12 +2768,13 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
-    statusTeam?: boolean
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: boolean
     status?: boolean
     avatar?: boolean
-    iconSpecialization?: boolean
     specializationId?: boolean
+    iconSpecialization?: boolean
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -2793,12 +2801,13 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
-    statusTeam?: boolean
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: boolean
     status?: boolean
     avatar?: boolean
-    iconSpecialization?: boolean
     specializationId?: boolean
+    iconSpecialization?: boolean
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -2814,12 +2823,13 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
-    statusTeam?: boolean
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: boolean
     status?: boolean
     avatar?: boolean
-    iconSpecialization?: boolean
     specializationId?: boolean
+    iconSpecialization?: boolean
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -2835,12 +2845,13 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
-    statusTeam?: boolean
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: boolean
     status?: boolean
     avatar?: boolean
-    iconSpecialization?: boolean
     specializationId?: boolean
+    iconSpecialization?: boolean
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -2849,7 +2860,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uid" | "email" | "password" | "role" | "statusTeam" | "username" | "status" | "avatar" | "iconSpecialization" | "specializationId" | "isVerified" | "isEmailVerified" | "isDeactivated" | "deactivatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uid" | "email" | "password" | "role" | "isLookingTeam" | "isGatheringTeam" | "username" | "status" | "avatar" | "specializationId" | "iconSpecialization" | "isVerified" | "isEmailVerified" | "isDeactivated" | "deactivatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tokens?: boolean | User$tokensArgs<ExtArgs>
     socialLinks?: boolean | User$socialLinksArgs<ExtArgs>
@@ -2892,12 +2903,13 @@ export namespace Prisma {
       email: string
       password: string
       role: $Enums.RoleType
-      statusTeam: $Enums.StatusTeamType | null
+      isLookingTeam: boolean
+      isGatheringTeam: boolean
       username: string | null
       status: string | null
       avatar: string | null
-      iconSpecialization: string | null
       specializationId: string | null
+      iconSpecialization: string | null
       isVerified: boolean
       isEmailVerified: boolean
       isDeactivated: boolean
@@ -3343,12 +3355,13 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'RoleType'>
-    readonly statusTeam: FieldRef<"User", 'StatusTeamType'>
+    readonly isLookingTeam: FieldRef<"User", 'Boolean'>
+    readonly isGatheringTeam: FieldRef<"User", 'Boolean'>
     readonly username: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
-    readonly iconSpecialization: FieldRef<"User", 'String'>
     readonly specializationId: FieldRef<"User", 'String'>
+    readonly iconSpecialization: FieldRef<"User", 'String'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
     readonly isEmailVerified: FieldRef<"User", 'Boolean'>
     readonly isDeactivated: FieldRef<"User", 'Boolean'>
@@ -6584,7 +6597,7 @@ export namespace Prisma {
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     topics?: boolean | Project$topicsArgs<ExtArgs>
-    platforms?: boolean | Project$platformsArgs<ExtArgs>
+    platformsLinks?: boolean | Project$platformsLinksArgs<ExtArgs>
     comments?: boolean | Project$commentsArgs<ExtArgs>
     bookmarks?: boolean | Project$bookmarksArgs<ExtArgs>
     views?: boolean | Project$viewsArgs<ExtArgs>
@@ -6639,7 +6652,7 @@ export namespace Prisma {
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     topics?: boolean | Project$topicsArgs<ExtArgs>
-    platforms?: boolean | Project$platformsArgs<ExtArgs>
+    platformsLinks?: boolean | Project$platformsLinksArgs<ExtArgs>
     comments?: boolean | Project$commentsArgs<ExtArgs>
     bookmarks?: boolean | Project$bookmarksArgs<ExtArgs>
     views?: boolean | Project$viewsArgs<ExtArgs>
@@ -6657,7 +6670,7 @@ export namespace Prisma {
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
       topics: Prisma.$TopicPayload<ExtArgs>[]
-      platforms: Prisma.$PlatformLinkPayload<ExtArgs>[]
+      platformsLinks: Prisma.$PlatformLinkPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
       views: Prisma.$ViewPayload<ExtArgs>[]
@@ -7070,7 +7083,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     topics<T extends Project$topicsArgs<ExtArgs> = {}>(args?: Subset<T, Project$topicsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    platforms<T extends Project$platformsArgs<ExtArgs> = {}>(args?: Subset<T, Project$platformsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    platformsLinks<T extends Project$platformsLinksArgs<ExtArgs> = {}>(args?: Subset<T, Project$platformsLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Project$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Project$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     bookmarks<T extends Project$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, Project$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     views<T extends Project$viewsArgs<ExtArgs> = {}>(args?: Subset<T, Project$viewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7534,9 +7547,9 @@ export namespace Prisma {
   }
 
   /**
-   * Project.platforms
+   * Project.platformsLinks
    */
-  export type Project$platformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Project$platformsLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PlatformLink
      */
@@ -13393,7 +13406,7 @@ export namespace Prisma {
   export type SpecializationMinAggregateOutputType = {
     id: string | null
     title: string | null
-    route: $Enums.RouteSpecializationType | null
+    careerPath: $Enums.PathCareerType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13401,7 +13414,7 @@ export namespace Prisma {
   export type SpecializationMaxAggregateOutputType = {
     id: string | null
     title: string | null
-    route: $Enums.RouteSpecializationType | null
+    careerPath: $Enums.PathCareerType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13409,7 +13422,7 @@ export namespace Prisma {
   export type SpecializationCountAggregateOutputType = {
     id: number
     title: number
-    route: number
+    careerPath: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -13419,7 +13432,7 @@ export namespace Prisma {
   export type SpecializationMinAggregateInputType = {
     id?: true
     title?: true
-    route?: true
+    careerPath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13427,7 +13440,7 @@ export namespace Prisma {
   export type SpecializationMaxAggregateInputType = {
     id?: true
     title?: true
-    route?: true
+    careerPath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13435,7 +13448,7 @@ export namespace Prisma {
   export type SpecializationCountAggregateInputType = {
     id?: true
     title?: true
-    route?: true
+    careerPath?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13516,7 +13529,7 @@ export namespace Prisma {
   export type SpecializationGroupByOutputType = {
     id: string
     title: string
-    route: $Enums.RouteSpecializationType
+    careerPath: $Enums.PathCareerType
     createdAt: Date
     updatedAt: Date
     _count: SpecializationCountAggregateOutputType | null
@@ -13541,7 +13554,7 @@ export namespace Prisma {
   export type SpecializationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    route?: boolean
+    careerPath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Specialization$usersArgs<ExtArgs>
@@ -13551,7 +13564,7 @@ export namespace Prisma {
   export type SpecializationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    route?: boolean
+    careerPath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["specialization"]>
@@ -13559,7 +13572,7 @@ export namespace Prisma {
   export type SpecializationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    route?: boolean
+    careerPath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["specialization"]>
@@ -13567,12 +13580,12 @@ export namespace Prisma {
   export type SpecializationSelectScalar = {
     id?: boolean
     title?: boolean
-    route?: boolean
+    careerPath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SpecializationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "route" | "createdAt" | "updatedAt", ExtArgs["result"]["specialization"]>
+  export type SpecializationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "careerPath" | "createdAt" | "updatedAt", ExtArgs["result"]["specialization"]>
   export type SpecializationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Specialization$usersArgs<ExtArgs>
     _count?: boolean | SpecializationCountOutputTypeDefaultArgs<ExtArgs>
@@ -13588,7 +13601,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
-      route: $Enums.RouteSpecializationType
+      careerPath: $Enums.PathCareerType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["specialization"]>
@@ -14017,7 +14030,7 @@ export namespace Prisma {
   interface SpecializationFieldRefs {
     readonly id: FieldRef<"Specialization", 'String'>
     readonly title: FieldRef<"Specialization", 'String'>
-    readonly route: FieldRef<"Specialization", 'RouteSpecializationType'>
+    readonly careerPath: FieldRef<"Specialization", 'PathCareerType'>
     readonly createdAt: FieldRef<"Specialization", 'DateTime'>
     readonly updatedAt: FieldRef<"Specialization", 'DateTime'>
   }
@@ -18904,12 +18917,13 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     role: 'role',
-    statusTeam: 'statusTeam',
+    isLookingTeam: 'isLookingTeam',
+    isGatheringTeam: 'isGatheringTeam',
     username: 'username',
     status: 'status',
     avatar: 'avatar',
-    iconSpecialization: 'iconSpecialization',
     specializationId: 'specializationId',
+    iconSpecialization: 'iconSpecialization',
     isVerified: 'isVerified',
     isEmailVerified: 'isEmailVerified',
     isDeactivated: 'isDeactivated',
@@ -19037,7 +19051,7 @@ export namespace Prisma {
   export const SpecializationScalarFieldEnum: {
     id: 'id',
     title: 'title',
-    route: 'route',
+    careerPath: 'careerPath',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19183,20 +19197,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'StatusTeamType'
-   */
-  export type EnumStatusTeamTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusTeamType'>
-    
-
-
-  /**
-   * Reference to a field of type 'StatusTeamType[]'
-   */
-  export type ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusTeamType[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -19246,16 +19246,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'RouteSpecializationType'
+   * Reference to a field of type 'PathCareerType'
    */
-  export type EnumRouteSpecializationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RouteSpecializationType'>
+  export type EnumPathCareerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PathCareerType'>
     
 
 
   /**
-   * Reference to a field of type 'RouteSpecializationType[]'
+   * Reference to a field of type 'PathCareerType[]'
    */
-  export type ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RouteSpecializationType[]'>
+  export type ListEnumPathCareerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PathCareerType[]'>
     
 
 
@@ -19299,12 +19299,13 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumRoleTypeFilter<"User"> | $Enums.RoleType
-    statusTeam?: EnumStatusTeamTypeNullableFilter<"User"> | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFilter<"User"> | boolean
+    isGatheringTeam?: BoolFilter<"User"> | boolean
     username?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
-    iconSpecialization?: StringNullableFilter<"User"> | string | null
     specializationId?: StringNullableFilter<"User"> | string | null
+    iconSpecialization?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isEmailVerified?: BoolFilter<"User"> | boolean
     isDeactivated?: BoolFilter<"User"> | boolean
@@ -19330,12 +19331,13 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    statusTeam?: SortOrderInput | SortOrder
+    isLookingTeam?: SortOrder
+    isGatheringTeam?: SortOrder
     username?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
-    iconSpecialization?: SortOrderInput | SortOrder
     specializationId?: SortOrderInput | SortOrder
+    iconSpecialization?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isEmailVerified?: SortOrder
     isDeactivated?: SortOrder
@@ -19364,12 +19366,13 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     role?: EnumRoleTypeFilter<"User"> | $Enums.RoleType
-    statusTeam?: EnumStatusTeamTypeNullableFilter<"User"> | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFilter<"User"> | boolean
+    isGatheringTeam?: BoolFilter<"User"> | boolean
     username?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
-    iconSpecialization?: StringNullableFilter<"User"> | string | null
     specializationId?: StringNullableFilter<"User"> | string | null
+    iconSpecialization?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isEmailVerified?: BoolFilter<"User"> | boolean
     isDeactivated?: BoolFilter<"User"> | boolean
@@ -19395,12 +19398,13 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    statusTeam?: SortOrderInput | SortOrder
+    isLookingTeam?: SortOrder
+    isGatheringTeam?: SortOrder
     username?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
-    iconSpecialization?: SortOrderInput | SortOrder
     specializationId?: SortOrderInput | SortOrder
+    iconSpecialization?: SortOrderInput | SortOrder
     isVerified?: SortOrder
     isEmailVerified?: SortOrder
     isDeactivated?: SortOrder
@@ -19423,12 +19427,13 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleTypeWithAggregatesFilter<"User"> | $Enums.RoleType
-    statusTeam?: EnumStatusTeamTypeNullableWithAggregatesFilter<"User"> | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolWithAggregatesFilter<"User"> | boolean
+    isGatheringTeam?: BoolWithAggregatesFilter<"User"> | boolean
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
     status?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
-    iconSpecialization?: StringNullableWithAggregatesFilter<"User"> | string | null
     specializationId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    iconSpecialization?: StringNullableWithAggregatesFilter<"User"> | string | null
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     isEmailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     isDeactivated?: BoolWithAggregatesFilter<"User"> | boolean
@@ -19629,7 +19634,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     topics?: TopicListRelationFilter
-    platforms?: PlatformLinkListRelationFilter
+    platformsLinks?: PlatformLinkListRelationFilter
     comments?: CommentListRelationFilter
     bookmarks?: BookmarkListRelationFilter
     views?: ViewListRelationFilter
@@ -19649,7 +19654,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
     topics?: TopicOrderByRelationAggregateInput
-    platforms?: PlatformLinkOrderByRelationAggregateInput
+    platformsLinks?: PlatformLinkOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     bookmarks?: BookmarkOrderByRelationAggregateInput
     views?: ViewOrderByRelationAggregateInput
@@ -19672,7 +19677,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     topics?: TopicListRelationFilter
-    platforms?: PlatformLinkListRelationFilter
+    platformsLinks?: PlatformLinkListRelationFilter
     comments?: CommentListRelationFilter
     bookmarks?: BookmarkListRelationFilter
     views?: ViewListRelationFilter
@@ -20068,7 +20073,7 @@ export namespace Prisma {
     NOT?: SpecializationWhereInput | SpecializationWhereInput[]
     id?: StringFilter<"Specialization"> | string
     title?: StringFilter<"Specialization"> | string
-    route?: EnumRouteSpecializationTypeFilter<"Specialization"> | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFilter<"Specialization"> | $Enums.PathCareerType
     createdAt?: DateTimeFilter<"Specialization"> | Date | string
     updatedAt?: DateTimeFilter<"Specialization"> | Date | string
     users?: UserListRelationFilter
@@ -20077,7 +20082,7 @@ export namespace Prisma {
   export type SpecializationOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    route?: SortOrder
+    careerPath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
@@ -20085,20 +20090,20 @@ export namespace Prisma {
 
   export type SpecializationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    title?: string
     AND?: SpecializationWhereInput | SpecializationWhereInput[]
     OR?: SpecializationWhereInput[]
     NOT?: SpecializationWhereInput | SpecializationWhereInput[]
-    title?: StringFilter<"Specialization"> | string
-    route?: EnumRouteSpecializationTypeFilter<"Specialization"> | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFilter<"Specialization"> | $Enums.PathCareerType
     createdAt?: DateTimeFilter<"Specialization"> | Date | string
     updatedAt?: DateTimeFilter<"Specialization"> | Date | string
     users?: UserListRelationFilter
-  }, "id">
+  }, "id" | "title">
 
   export type SpecializationOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    route?: SortOrder
+    careerPath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SpecializationCountOrderByAggregateInput
@@ -20112,7 +20117,7 @@ export namespace Prisma {
     NOT?: SpecializationScalarWhereWithAggregatesInput | SpecializationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Specialization"> | string
     title?: StringWithAggregatesFilter<"Specialization"> | string
-    route?: EnumRouteSpecializationTypeWithAggregatesFilter<"Specialization"> | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeWithAggregatesFilter<"Specialization"> | $Enums.PathCareerType
     createdAt?: DateTimeWithAggregatesFilter<"Specialization"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Specialization"> | Date | string
   }
@@ -20379,7 +20384,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -20409,12 +20415,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -20438,7 +20445,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20468,12 +20476,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -20498,12 +20507,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -20517,7 +20527,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20536,12 +20547,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -20753,7 +20765,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutProjectsInput
     topics?: TopicCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     comments?: CommentCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkCreateNestedManyWithoutProjectInput
     views?: ViewCreateNestedManyWithoutProjectInput
@@ -20772,7 +20784,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicUncheckedCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     comments?: CommentUncheckedCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutProjectInput
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
@@ -20791,7 +20803,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutProjectsNestedInput
     topics?: TopicUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     comments?: CommentUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUpdateManyWithoutProjectNestedInput
     views?: ViewUpdateManyWithoutProjectNestedInput
@@ -20810,7 +20822,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUncheckedUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     comments?: CommentUncheckedUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutProjectNestedInput
     views?: ViewUncheckedUpdateManyWithoutProjectNestedInput
@@ -21070,7 +21082,7 @@ export namespace Prisma {
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutPlatformsInput
+    project?: ProjectCreateNestedOneWithoutPlatformsLinksInput
   }
 
   export type PlatformLinkUncheckedCreateInput = {
@@ -21090,7 +21102,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutPlatformsNestedInput
+    project?: ProjectUpdateOneWithoutPlatformsLinksNestedInput
   }
 
   export type PlatformLinkUncheckedUpdateInput = {
@@ -21204,7 +21216,7 @@ export namespace Prisma {
   export type SpecializationCreateInput = {
     id?: string
     title: string
-    route?: $Enums.RouteSpecializationType
+    careerPath?: $Enums.PathCareerType
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutSpecializationInput
@@ -21213,7 +21225,7 @@ export namespace Prisma {
   export type SpecializationUncheckedCreateInput = {
     id?: string
     title: string
-    route?: $Enums.RouteSpecializationType
+    careerPath?: $Enums.PathCareerType
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutSpecializationInput
@@ -21222,7 +21234,7 @@ export namespace Prisma {
   export type SpecializationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutSpecializationNestedInput
@@ -21231,7 +21243,7 @@ export namespace Prisma {
   export type SpecializationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutSpecializationNestedInput
@@ -21240,7 +21252,7 @@ export namespace Prisma {
   export type SpecializationCreateManyInput = {
     id?: string
     title: string
-    route?: $Enums.RouteSpecializationType
+    careerPath?: $Enums.PathCareerType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21248,7 +21260,7 @@ export namespace Prisma {
   export type SpecializationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21256,7 +21268,7 @@ export namespace Prisma {
   export type SpecializationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21557,11 +21569,9 @@ export namespace Prisma {
     not?: NestedEnumRoleTypeFilter<$PrismaModel> | $Enums.RoleType
   }
 
-  export type EnumStatusTeamTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTeamType | EnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel> | $Enums.StatusTeamType | null
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -21577,11 +21587,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -21707,12 +21712,13 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    statusTeam?: SortOrder
+    isLookingTeam?: SortOrder
+    isGatheringTeam?: SortOrder
     username?: SortOrder
     status?: SortOrder
     avatar?: SortOrder
-    iconSpecialization?: SortOrder
     specializationId?: SortOrder
+    iconSpecialization?: SortOrder
     isVerified?: SortOrder
     isEmailVerified?: SortOrder
     isDeactivated?: SortOrder
@@ -21731,12 +21737,13 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    statusTeam?: SortOrder
+    isLookingTeam?: SortOrder
+    isGatheringTeam?: SortOrder
     username?: SortOrder
     status?: SortOrder
     avatar?: SortOrder
-    iconSpecialization?: SortOrder
     specializationId?: SortOrder
+    iconSpecialization?: SortOrder
     isVerified?: SortOrder
     isEmailVerified?: SortOrder
     isDeactivated?: SortOrder
@@ -21751,12 +21758,13 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    statusTeam?: SortOrder
+    isLookingTeam?: SortOrder
+    isGatheringTeam?: SortOrder
     username?: SortOrder
     status?: SortOrder
     avatar?: SortOrder
-    iconSpecialization?: SortOrder
     specializationId?: SortOrder
+    iconSpecialization?: SortOrder
     isVerified?: SortOrder
     isEmailVerified?: SortOrder
     isDeactivated?: SortOrder
@@ -21813,14 +21821,12 @@ export namespace Prisma {
     _max?: NestedEnumRoleTypeFilter<$PrismaModel>
   }
 
-  export type EnumStatusTeamTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTeamType | EnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumStatusTeamTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusTeamType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel>
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -21839,14 +21845,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -22276,11 +22274,11 @@ export namespace Prisma {
     position?: SortOrder
   }
 
-  export type EnumRouteSpecializationTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.RouteSpecializationType | EnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel> | $Enums.RouteSpecializationType
+  export type EnumPathCareerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PathCareerType | EnumPathCareerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPathCareerTypeFilter<$PrismaModel> | $Enums.PathCareerType
   }
 
   export type UserListRelationFilter = {
@@ -22296,7 +22294,7 @@ export namespace Prisma {
   export type SpecializationCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    route?: SortOrder
+    careerPath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22304,7 +22302,7 @@ export namespace Prisma {
   export type SpecializationMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    route?: SortOrder
+    careerPath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22312,19 +22310,19 @@ export namespace Prisma {
   export type SpecializationMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    route?: SortOrder
+    careerPath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type EnumRouteSpecializationTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.RouteSpecializationType | EnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRouteSpecializationTypeWithAggregatesFilter<$PrismaModel> | $Enums.RouteSpecializationType
+  export type EnumPathCareerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PathCareerType | EnumPathCareerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPathCareerTypeWithAggregatesFilter<$PrismaModel> | $Enums.PathCareerType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel>
-    _max?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel>
+    _min?: NestedEnumPathCareerTypeFilter<$PrismaModel>
+    _max?: NestedEnumPathCareerTypeFilter<$PrismaModel>
   }
 
   export type FollowFollowerIdFollowingIdCompoundUniqueInput = {
@@ -22643,16 +22641,12 @@ export namespace Prisma {
     set?: $Enums.RoleType
   }
 
-  export type NullableEnumStatusTeamTypeFieldUpdateOperationsInput = {
-    set?: $Enums.StatusTeamType | null
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -23588,20 +23582,20 @@ export namespace Prisma {
     update?: XOR<XOR<TopicUpdateToOneWithWhereWithoutViewsInput, TopicUpdateWithoutViewsInput>, TopicUncheckedUpdateWithoutViewsInput>
   }
 
-  export type ProjectCreateNestedOneWithoutPlatformsInput = {
-    create?: XOR<ProjectCreateWithoutPlatformsInput, ProjectUncheckedCreateWithoutPlatformsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutPlatformsInput
+  export type ProjectCreateNestedOneWithoutPlatformsLinksInput = {
+    create?: XOR<ProjectCreateWithoutPlatformsLinksInput, ProjectUncheckedCreateWithoutPlatformsLinksInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutPlatformsLinksInput
     connect?: ProjectWhereUniqueInput
   }
 
-  export type ProjectUpdateOneWithoutPlatformsNestedInput = {
-    create?: XOR<ProjectCreateWithoutPlatformsInput, ProjectUncheckedCreateWithoutPlatformsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutPlatformsInput
-    upsert?: ProjectUpsertWithoutPlatformsInput
+  export type ProjectUpdateOneWithoutPlatformsLinksNestedInput = {
+    create?: XOR<ProjectCreateWithoutPlatformsLinksInput, ProjectUncheckedCreateWithoutPlatformsLinksInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutPlatformsLinksInput
+    upsert?: ProjectUpsertWithoutPlatformsLinksInput
     disconnect?: ProjectWhereInput | boolean
     delete?: ProjectWhereInput | boolean
     connect?: ProjectWhereUniqueInput
-    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutPlatformsInput, ProjectUpdateWithoutPlatformsInput>, ProjectUncheckedUpdateWithoutPlatformsInput>
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutPlatformsLinksInput, ProjectUpdateWithoutPlatformsLinksInput>, ProjectUncheckedUpdateWithoutPlatformsLinksInput>
   }
 
   export type UserCreateNestedOneWithoutSocialLinksInput = {
@@ -23634,8 +23628,8 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type EnumRouteSpecializationTypeFieldUpdateOperationsInput = {
-    set?: $Enums.RouteSpecializationType
+  export type EnumPathCareerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PathCareerType
   }
 
   export type UserUpdateManyWithoutSpecializationNestedInput = {
@@ -23844,11 +23838,9 @@ export namespace Prisma {
     not?: NestedEnumRoleTypeFilter<$PrismaModel> | $Enums.RoleType
   }
 
-  export type NestedEnumStatusTeamTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTeamType | EnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel> | $Enums.StatusTeamType | null
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -23863,11 +23855,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -23946,25 +23933,12 @@ export namespace Prisma {
     _max?: NestedEnumRoleTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumStatusTeamTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTeamType | EnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.StatusTeamType[] | ListEnumStatusTeamTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumStatusTeamTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusTeamType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumStatusTeamTypeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -23984,12 +23958,15 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -24060,21 +24037,21 @@ export namespace Prisma {
     _max?: NestedEnumTargetContentTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumRouteSpecializationTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.RouteSpecializationType | EnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel> | $Enums.RouteSpecializationType
+  export type NestedEnumPathCareerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PathCareerType | EnumPathCareerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPathCareerTypeFilter<$PrismaModel> | $Enums.PathCareerType
   }
 
-  export type NestedEnumRouteSpecializationTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.RouteSpecializationType | EnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.RouteSpecializationType[] | ListEnumRouteSpecializationTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumRouteSpecializationTypeWithAggregatesFilter<$PrismaModel> | $Enums.RouteSpecializationType
+  export type NestedEnumPathCareerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PathCareerType | EnumPathCareerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PathCareerType[] | ListEnumPathCareerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPathCareerTypeWithAggregatesFilter<$PrismaModel> | $Enums.PathCareerType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel>
-    _max?: NestedEnumRouteSpecializationTypeFilter<$PrismaModel>
+    _min?: NestedEnumPathCareerTypeFilter<$PrismaModel>
+    _max?: NestedEnumPathCareerTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumTokenTypeFilter<$PrismaModel = never> = {
@@ -24195,7 +24172,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     comments?: CommentCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkCreateNestedManyWithoutProjectInput
     views?: ViewCreateNestedManyWithoutProjectInput
@@ -24213,7 +24190,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicUncheckedCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     comments?: CommentUncheckedCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutProjectInput
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
@@ -24355,7 +24332,7 @@ export namespace Prisma {
   export type SpecializationCreateWithoutUsersInput = {
     id?: string
     title: string
-    route?: $Enums.RouteSpecializationType
+    careerPath?: $Enums.PathCareerType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24363,7 +24340,7 @@ export namespace Prisma {
   export type SpecializationUncheckedCreateWithoutUsersInput = {
     id?: string
     title: string
-    route?: $Enums.RouteSpecializationType
+    careerPath?: $Enums.PathCareerType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24681,7 +24658,7 @@ export namespace Prisma {
   export type SpecializationUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24689,7 +24666,7 @@ export namespace Prisma {
   export type SpecializationUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    route?: EnumRouteSpecializationTypeFieldUpdateOperationsInput | $Enums.RouteSpecializationType
+    careerPath?: EnumPathCareerTypeFieldUpdateOperationsInput | $Enums.PathCareerType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24743,7 +24720,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -24772,12 +24750,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -24816,7 +24795,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24845,12 +24825,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -24967,7 +24948,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutProjectsInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     comments?: CommentCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkCreateNestedManyWithoutProjectInput
     views?: ViewCreateNestedManyWithoutProjectInput
@@ -24985,7 +24966,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     comments?: CommentUncheckedCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutProjectInput
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
@@ -25027,7 +25008,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -25056,12 +25038,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -25155,7 +25138,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutProjectsNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     comments?: CommentUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUpdateManyWithoutProjectNestedInput
     views?: ViewUpdateManyWithoutProjectNestedInput
@@ -25173,7 +25156,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     comments?: CommentUncheckedUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutProjectNestedInput
     views?: ViewUncheckedUpdateManyWithoutProjectNestedInput
@@ -25226,7 +25209,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25255,12 +25239,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -25284,7 +25269,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -25313,12 +25299,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -25508,7 +25495,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25537,12 +25525,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -25659,7 +25648,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -25688,12 +25678,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -25790,7 +25781,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutProjectsInput
     topics?: TopicCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkCreateNestedManyWithoutProjectInput
     views?: ViewCreateNestedManyWithoutProjectInput
   }
@@ -25808,7 +25799,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicUncheckedCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutProjectInput
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -25865,7 +25856,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25894,12 +25886,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -25991,7 +25984,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutProjectsNestedInput
     topics?: TopicUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUpdateManyWithoutProjectNestedInput
     views?: ViewUpdateManyWithoutProjectNestedInput
   }
@@ -26009,7 +26002,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUncheckedUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutProjectNestedInput
     views?: ViewUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -26057,7 +26050,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26086,12 +26080,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -26127,7 +26122,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutProjectsInput
     topics?: TopicCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     comments?: CommentCreateNestedManyWithoutProjectInput
     views?: ViewCreateNestedManyWithoutProjectInput
   }
@@ -26145,7 +26140,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicUncheckedCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     comments?: CommentUncheckedCreateNestedManyWithoutProjectInput
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -26202,7 +26197,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26231,12 +26227,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -26278,7 +26275,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutProjectsNestedInput
     topics?: TopicUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     comments?: CommentUpdateManyWithoutProjectNestedInput
     views?: ViewUpdateManyWithoutProjectNestedInput
   }
@@ -26296,7 +26293,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUncheckedUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     comments?: CommentUncheckedUpdateManyWithoutProjectNestedInput
     views?: ViewUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -26344,7 +26341,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26373,12 +26371,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -26414,7 +26413,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutProjectsInput
     topics?: TopicCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkCreateNestedManyWithoutProjectInput
     comments?: CommentCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkCreateNestedManyWithoutProjectInput
   }
@@ -26432,7 +26431,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     topics?: TopicUncheckedCreateNestedManyWithoutAttachedProjectInput
-    platforms?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
+    platformsLinks?: PlatformLinkUncheckedCreateNestedManyWithoutProjectInput
     comments?: CommentUncheckedCreateNestedManyWithoutProjectInput
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -26489,7 +26488,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26518,12 +26518,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -26565,7 +26566,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutProjectsNestedInput
     topics?: TopicUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     comments?: CommentUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUpdateManyWithoutProjectNestedInput
   }
@@ -26583,7 +26584,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUncheckedUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     comments?: CommentUncheckedUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -26625,7 +26626,7 @@ export namespace Prisma {
     bookmarks?: BookmarkUncheckedUpdateManyWithoutTopicNestedInput
   }
 
-  export type ProjectCreateWithoutPlatformsInput = {
+  export type ProjectCreateWithoutPlatformsLinksInput = {
     id?: string
     title: string
     images?: ProjectCreateimagesInput | string[]
@@ -26643,7 +26644,7 @@ export namespace Prisma {
     views?: ViewCreateNestedManyWithoutProjectInput
   }
 
-  export type ProjectUncheckedCreateWithoutPlatformsInput = {
+  export type ProjectUncheckedCreateWithoutPlatformsLinksInput = {
     id?: string
     title: string
     images?: ProjectCreateimagesInput | string[]
@@ -26661,23 +26662,23 @@ export namespace Prisma {
     views?: ViewUncheckedCreateNestedManyWithoutProjectInput
   }
 
-  export type ProjectCreateOrConnectWithoutPlatformsInput = {
+  export type ProjectCreateOrConnectWithoutPlatformsLinksInput = {
     where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutPlatformsInput, ProjectUncheckedCreateWithoutPlatformsInput>
+    create: XOR<ProjectCreateWithoutPlatformsLinksInput, ProjectUncheckedCreateWithoutPlatformsLinksInput>
   }
 
-  export type ProjectUpsertWithoutPlatformsInput = {
-    update: XOR<ProjectUpdateWithoutPlatformsInput, ProjectUncheckedUpdateWithoutPlatformsInput>
-    create: XOR<ProjectCreateWithoutPlatformsInput, ProjectUncheckedCreateWithoutPlatformsInput>
+  export type ProjectUpsertWithoutPlatformsLinksInput = {
+    update: XOR<ProjectUpdateWithoutPlatformsLinksInput, ProjectUncheckedUpdateWithoutPlatformsLinksInput>
+    create: XOR<ProjectCreateWithoutPlatformsLinksInput, ProjectUncheckedCreateWithoutPlatformsLinksInput>
     where?: ProjectWhereInput
   }
 
-  export type ProjectUpdateToOneWithWhereWithoutPlatformsInput = {
+  export type ProjectUpdateToOneWithWhereWithoutPlatformsLinksInput = {
     where?: ProjectWhereInput
-    data: XOR<ProjectUpdateWithoutPlatformsInput, ProjectUncheckedUpdateWithoutPlatformsInput>
+    data: XOR<ProjectUpdateWithoutPlatformsLinksInput, ProjectUncheckedUpdateWithoutPlatformsLinksInput>
   }
 
-  export type ProjectUpdateWithoutPlatformsInput = {
+  export type ProjectUpdateWithoutPlatformsLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
@@ -26695,7 +26696,7 @@ export namespace Prisma {
     views?: ViewUpdateManyWithoutProjectNestedInput
   }
 
-  export type ProjectUncheckedUpdateWithoutPlatformsInput = {
+  export type ProjectUncheckedUpdateWithoutPlatformsLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
@@ -26719,7 +26720,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26748,12 +26750,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -26792,7 +26795,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26821,12 +26825,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -26850,7 +26855,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26879,7 +26885,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26937,12 +26944,13 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumRoleTypeFilter<"User"> | $Enums.RoleType
-    statusTeam?: EnumStatusTeamTypeNullableFilter<"User"> | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFilter<"User"> | boolean
+    isGatheringTeam?: BoolFilter<"User"> | boolean
     username?: StringNullableFilter<"User"> | string | null
     status?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
-    iconSpecialization?: StringNullableFilter<"User"> | string | null
     specializationId?: StringNullableFilter<"User"> | string | null
+    iconSpecialization?: StringNullableFilter<"User"> | string | null
     isVerified?: BoolFilter<"User"> | boolean
     isEmailVerified?: BoolFilter<"User"> | boolean
     isDeactivated?: BoolFilter<"User"> | boolean
@@ -26957,7 +26965,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -26986,12 +26995,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -27020,7 +27030,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -27049,12 +27060,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -27093,7 +27105,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27122,12 +27135,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -27161,7 +27175,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27190,12 +27205,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -27382,7 +27398,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -27411,12 +27428,13 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
-    iconSpecialization?: string | null
     specializationId?: string | null
+    iconSpecialization?: string | null
     isVerified?: boolean
     isEmailVerified?: boolean
     isDeactivated?: boolean
@@ -27455,7 +27473,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27484,12 +27503,13 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     specializationId?: NullableStringFieldUpdateOperationsInput | string | null
+    iconSpecialization?: NullableStringFieldUpdateOperationsInput | string | null
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     isDeactivated?: BoolFieldUpdateOperationsInput | boolean
@@ -27654,7 +27674,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUpdateManyWithoutProjectNestedInput
     comments?: CommentUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUpdateManyWithoutProjectNestedInput
     views?: ViewUpdateManyWithoutProjectNestedInput
@@ -27672,7 +27692,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     topics?: TopicUncheckedUpdateManyWithoutAttachedProjectNestedInput
-    platforms?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
+    platformsLinks?: PlatformLinkUncheckedUpdateManyWithoutProjectNestedInput
     comments?: CommentUncheckedUpdateManyWithoutProjectNestedInput
     bookmarks?: BookmarkUncheckedUpdateManyWithoutProjectNestedInput
     views?: ViewUncheckedUpdateManyWithoutProjectNestedInput
@@ -28201,7 +28221,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.RoleType
-    statusTeam?: $Enums.StatusTeamType | null
+    isLookingTeam?: boolean
+    isGatheringTeam?: boolean
     username?: string | null
     status?: string | null
     avatar?: string | null
@@ -28219,7 +28240,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28248,7 +28270,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28277,7 +28300,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleTypeFieldUpdateOperationsInput | $Enums.RoleType
-    statusTeam?: NullableEnumStatusTeamTypeFieldUpdateOperationsInput | $Enums.StatusTeamType | null
+    isLookingTeam?: BoolFieldUpdateOperationsInput | boolean
+    isGatheringTeam?: BoolFieldUpdateOperationsInput | boolean
     username?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null

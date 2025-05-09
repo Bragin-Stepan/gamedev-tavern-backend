@@ -7,30 +7,9 @@ import {
 	MaxLength
 } from 'class-validator';
 
-import type { RouteSpecializationType } from '@/prisma/generated';
+import { SpecializationInput } from '../../specialization/inputs/specialization.input';
 
-@InputType()
-class SocialLinkInput {
-	@Field(() => String)
-	@IsString()
-	@IsNotEmpty()
-	public title: string;
-
-	@Field(() => String)
-	@IsString()
-	@IsNotEmpty()
-	@Matches(/^https?:\/\//, { each: true })
-	public url: string;
-}
-
-class Specialization {
-	@Field(() => String)
-	@IsString()
-	@IsNotEmpty()
-	public title: string;
-
-	public route: RouteSpecializationType;
-}
+import { SocialLinkInput } from './social-link.input';
 
 @InputType()
 export class ChangeProfileInfoInput {
@@ -45,9 +24,14 @@ export class ChangeProfileInfoInput {
 	@MaxLength(300)
 	public status?: string;
 
-	@Field(() => [SocialLinkInput])
 	@IsOptional()
-	public socialLinks?: SocialLinkInput[];
+	@Field(() => [SocialLinkInput])
+	public socialLinks: SocialLinkInput[];
 
-	public specialization;
+	@Field(() => String)
+	@IsOptional()
+	public iconSpecialization?: string;
+
+	@Field(() => SpecializationInput)
+	public specialization: SpecializationInput;
 }
