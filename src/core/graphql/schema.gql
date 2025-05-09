@@ -1,0 +1,137 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthModel {
+  message: String
+  user: UserModel
+}
+
+input ChangeEmailInput {
+  email: String!
+}
+
+input ChangePasswordInput {
+  newPassword: String!
+  oldPassword: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DeactivateAccountInput {
+  email: String!
+  password: String!
+  pin: String
+}
+
+type DeviceModel {
+  browser: String!
+  os: String!
+  type: String!
+}
+
+input EnableTotpInput {
+  pin: String!
+  secret: String!
+}
+
+type LocationModel {
+  city: String!
+  country: String!
+  latidute: Float!
+  longitude: Float!
+}
+
+input LoginInput {
+  login: String!
+  password: String!
+  pin: String
+}
+
+type Mutation {
+  changeEmail(data: ChangeEmailInput!): Boolean!
+  changePassword(data: ChangePasswordInput!): Boolean!
+  changeProfileAvatar(avatar: Upload!): Boolean!
+  clearSessionCookie: Boolean!
+  createUser(data: CreateUserInput!): Boolean!
+  deactivateAccount(data: DeactivateAccountInput!): AuthModel!
+  disableTotp: Boolean!
+  enableTotp(data: EnableTotpInput!): Boolean!
+  loginUser(data: LoginInput!): AuthModel!
+  logoutUser: Boolean!
+  newPassword(data: NewPasswordInput!): Boolean!
+  removeProfileAvatar: Boolean!
+  removeSession(id: String!): Boolean!
+  resetPassword(data: ResetPasswordInput!): Boolean!
+  verifyAccount(data: VerificationInput!): AuthModel!
+}
+
+input NewPasswordInput {
+  password: String!
+  passwordRepeat: String!
+  token: String!
+}
+
+type Query {
+  findCurrentSession: SessionModel!
+  findProfile: UserModel!
+  findSessionsByUser: [SessionModel!]!
+  generateTotpSecret: TotpModel!
+}
+
+input ResetPasswordInput {
+  email: String!
+}
+
+type SessionMetadataModel {
+  device: DeviceModel!
+  ip: String!
+  location: LocationModel!
+}
+
+type SessionModel {
+  createdAt: String!
+  id: ID!
+  metadata: SessionMetadataModel!
+  userId: String!
+}
+
+type TotpModel {
+  qrcodeUrl: String!
+  secret: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UserModel {
+  avatar: String
+  createdAt: DateTime!
+  deactivatedAt: DateTime
+  email: String!
+  id: ID!
+  isDeactivated: Boolean!
+  isEmailVerified: Boolean!
+  isTotpEnabled: Boolean!
+  isVerified: Boolean!
+  password: String!
+  role: String!
+  status: String
+  totpSecret: String
+  uid: Float!
+  updatedAt: DateTime!
+  username: String
+}
+
+input VerificationInput {
+  token: String!
+}
