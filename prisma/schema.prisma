@@ -15,12 +15,29 @@ model User {
   email    String @unique
   password String
 
-  tokens Token[]
-  role   RoleType @default(USER)
+  tokens      Token[]
+  socialLinks SocialLink[]
+  role        RoleType        @default(USER)
+  statusTeam  StatusTeamType? @map("status_team")
 
   username String?
   status   String?
   avatar   String?
+
+  candidateCard CandidateCard?
+  projects      Project[]
+  topics        Topic[]        @relation("topics")
+  comments      Comment[]
+  bookmarks     Bookmark[]
+  views         View[]
+
+  iconSpecialization String? @map("icon_specialization")
+
+  specialization   Specialization? @relation(fields: [specializationId], references: [id])
+  specializationId String?         @map("specialization_id")
+
+  followers  Follow[] @relation(name: "followers")
+  followings Follow[] @relation(name: "followings")
 
   isVerified      Boolean @default(false) @map("is_verified")
   isEmailVerified Boolean @default(false) @map("is_email_verified")
@@ -32,6 +49,236 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+model CandidateCard {
+  id String @id @default(uuid())
+
+  direction     String
+  experience    String
+  description   String
+  information   Json?
+  portfolioUrls String[] @map("portfolio_urls")
+
+  hiddenUntil  DateTime? @map("hidden_until")
+  lastPromoted DateTime? @map("last_promoted")
+  isHidden     Boolean   @default(false) @map("is_hidden")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("candidate_card")
+}
+
+model Topic {
+  id String @id @default(uuid())
+
+  title String
+  slug  String @unique
+
+  comments  Comment[]  @relation("topic_comments")
+  bookmarks Bookmark[] @relation("topic_bookmarks")
+  views     View[]     @relation("topic_views")
+
+  attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
+  attachedProjectId String?  @map("attached_project_id")
+
+  subcategory   Subcategory @relation("subcategory_topics", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  subcategoryId String      @map("subcategory_id")
+
+  author User   @relation("topics", fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("topics")
+}
+
+model Project {
+  id String @id @default(uuid())
+
+  title         String
+  images        String[]
+  genres        String[]
+  description   String
+  contentBlocks Json?    @map("content_blocks")
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String @map("author_id")
+
+  topics    Topic[]
+  platforms PlatformLink[]
+  comments  Comment[]      @relation("project_comments")
+  bookmarks Bookmark[]     @relation("project_bookmarks")
+  views     View[]         @relation("project_views")
+
+  isGathering Boolean @default(false) @map("is_gathering")
+  slug        String  @unique
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Comment {
+  id      String @id @default(uuid())
+  content String
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String @map("author_id")
+
+  replies  Comment[] @relation("comment_replies")
+  parent   Comment?  @relation("comment_replies", fields: [parentId], references: [id])
+  parentId String?   @map("parent_id")
+
+  targetContentType TargetContentType
+  targetId          String            @map("target_id")
+
+  project Project? @relation("project_comments", fields: [targetId], references: [id], map: "project_comments")
+  topic   Topic?   @relation("topic_comments", fields: [targetId], references: [id], map: "topic_comments")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("comments")
+}
+
+model Bookmark {
+  id String @id @default(uuid())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  targetContentType TargetContentType
+  targetId          String            @map("target_id")
+
+  project Project? @relation("project_bookmarks", fields: [targetId], references: [id], map: "project_bookmarks")
+  topic   Topic?   @relation("topic_bookmarks", fields: [targetId], references: [id], map: "topic_bookmarks")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([userId, targetContentType, targetId])
+  @@map("bookmarks")
+}
+
+model View {
+  id String @id @default(uuid())
+
+  viewer   User   @relation(fields: [viewerId], references: [id])
+  viewerId String @map("viewer_id")
+
+  targetContentType TargetContentType
+  targetId          String            @map("target_id")
+
+  project Project? @relation("project_views", fields: [targetId], references: [id], map: "project_views")
+  topic   Topic?   @relation("topic_views", fields: [targetId], references: [id], map: "topic_views")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([viewerId, targetContentType, targetId])
+  @@map("views")
+}
+
+model PlatformLink {
+  id String @id @default(uuid())
+
+  title    String
+  url      String
+  position Int
+
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String?  @map("project_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("platform_links")
+}
+
+model SocialLink {
+  id String @id @default(uuid())
+
+  title    String
+  url      String
+  position Int
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("social_links")
+}
+
+model Specialization {
+  id String @id @default(uuid())
+
+  title String
+  route RouteSpecializationType @default(OTHER)
+
+  users User[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("specializations")
+}
+
+model Follow {
+  id String @id @default(uuid())
+
+  follower   User   @relation(name: "followers", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId String @map("follower_id")
+
+  following   User   @relation(name: "followings", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String @map("following_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}
+
+model Category {
+  id String @id @default(uuid())
+
+  title    String
+  slug     String @unique
+  position Int
+
+  subcategories Subcategory[] @relation("subcategories")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("categories")
+}
+
+model Subcategory {
+  id String @id @default(uuid())
+
+  title    String
+  slug     String @unique
+  position Int
+
+  topics Topic[] @relation("subcategory_topics")
+
+  category   Category @relation("subcategories", fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String   @map("category_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("subcategories")
 }
 
 model Token {
@@ -59,14 +306,35 @@ enum TokenType {
   @@map("token_types")
 }
 
+enum TargetContentType {
+  PROJECT
+  TOPIC
+  CANDIDATE_CARD
+
+  @@map("target_content_types")
+}
+
 enum NotificationType {
-  STREAM_START
   NEW_FOLLOWER
   NEW_SPONSORSHIP
   ENABLE_TWO_FACTOR
   VERIFIED_CHANNEL
 
   @@map("notification_types")
+}
+
+enum RouteSpecializationType {
+  ART
+  DEVELOPER
+  MANAGER
+  OTHER
+}
+
+enum StatusTeamType {
+  FINDING
+  GATHERING
+
+  @@map("status_team_types")
 }
 
 enum RoleType {

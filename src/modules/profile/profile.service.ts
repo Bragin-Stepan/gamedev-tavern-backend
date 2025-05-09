@@ -82,32 +82,32 @@ export class ProfileService {
 		return true;
 	}
 
-	// 	public async changeInfo(user: User, input: ChangeProfileInfoInput) {
-	// 		const { username, displayName, bio } = input;
+	public async changeInfo(user: User, input: ChangeProfileInfoInput) {
+		const { username, displayName, status } = input;
 
-	// 		const usernameExists = await this.prismaService.user.findUnique({
-	// 			where: {
-	// 				username
-	// 			}
-	// 		});
+		const usernameExists = await this.prismaService.user.findUnique({
+			where: {
+				username
+			}
+		});
 
-	// 		if (usernameExists && username !== user.username) {
-	// 			throw new ConflictException('Это имя пользователя уже занято');
-	// 		}
+		if (usernameExists && username !== user.username) {
+			throw new ConflictException('Это имя пользователя уже занято');
+		}
 
-	// 		await this.prismaService.user.update({
-	// 			where: {
-	// 				id: user.id
-	// 			},
-	// 			data: {
-	// 				username,
-	// 				displayName,
-	// 				bio
-	// 			}
-	// 		});
+		await this.prismaService.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				username,
+				displayName,
+				bio
+			}
+		});
 
-	// 		return true;
-	// 	}
+		return true;
+	}
 
 	// 	public async findSocialLinks(user: User) {
 	// 		const socialLinks = await this.prismaService.socialLink.findMany({

@@ -126,13 +126,140 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
+  statusTeam: 'statusTeam',
   username: 'username',
   status: 'status',
   avatar: 'avatar',
+  iconSpecialization: 'iconSpecialization',
+  specializationId: 'specializationId',
   isVerified: 'isVerified',
   isEmailVerified: 'isEmailVerified',
   isDeactivated: 'isDeactivated',
   deactivatedAt: 'deactivatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CandidateCardScalarFieldEnum = {
+  id: 'id',
+  direction: 'direction',
+  experience: 'experience',
+  description: 'description',
+  information: 'information',
+  portfolioUrls: 'portfolioUrls',
+  hiddenUntil: 'hiddenUntil',
+  lastPromoted: 'lastPromoted',
+  isHidden: 'isHidden',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TopicScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  attachedProjectId: 'attachedProjectId',
+  subcategoryId: 'subcategoryId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  images: 'images',
+  genres: 'genres',
+  description: 'description',
+  contentBlocks: 'contentBlocks',
+  authorId: 'authorId',
+  isGathering: 'isGathering',
+  slug: 'slug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  authorId: 'authorId',
+  parentId: 'parentId',
+  targetContentType: 'targetContentType',
+  targetId: 'targetId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  targetContentType: 'targetContentType',
+  targetId: 'targetId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ViewScalarFieldEnum = {
+  id: 'id',
+  viewerId: 'viewerId',
+  targetContentType: 'targetContentType',
+  targetId: 'targetId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PlatformLinkScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  url: 'url',
+  position: 'position',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SocialLinkScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  url: 'url',
+  position: 'position',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SpecializationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  route: 'route',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followingId: 'followingId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubcategoryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  position: 'position',
+  categoryId: 'categoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -152,6 +279,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -161,10 +293,34 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.RoleType = exports.$Enums.RoleType = {
   ADMIN: 'ADMIN',
   MODERATOR: 'MODERATOR',
   USER: 'USER'
+};
+
+exports.StatusTeamType = exports.$Enums.StatusTeamType = {
+  FINDING: 'FINDING',
+  GATHERING: 'GATHERING'
+};
+
+exports.TargetContentType = exports.$Enums.TargetContentType = {
+  PROJECT: 'PROJECT',
+  TOPIC: 'TOPIC',
+  CANDIDATE_CARD: 'CANDIDATE_CARD'
+};
+
+exports.RouteSpecializationType = exports.$Enums.RouteSpecializationType = {
+  ART: 'ART',
+  DEVELOPER: 'DEVELOPER',
+  MANAGER: 'MANAGER',
+  OTHER: 'OTHER'
 };
 
 exports.TokenType = exports.$Enums.TokenType = {
@@ -176,6 +332,18 @@ exports.TokenType = exports.$Enums.TokenType = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  CandidateCard: 'CandidateCard',
+  Topic: 'Topic',
+  Project: 'Project',
+  Comment: 'Comment',
+  Bookmark: 'Bookmark',
+  View: 'View',
+  PlatformLink: 'PlatformLink',
+  SocialLink: 'SocialLink',
+  Specialization: 'Specialization',
+  Follow: 'Follow',
+  Category: 'Category',
+  Subcategory: 'Subcategory',
   Token: 'Token'
 };
 
