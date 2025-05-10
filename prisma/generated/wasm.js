@@ -164,6 +164,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   description: 'description',
   contentBlocks: 'contentBlocks',
   authorId: 'authorId',
+  isBookmarked: 'isBookmarked',
   viewCount: 'viewCount',
   isGathering: 'isGathering',
   slug: 'slug',
@@ -175,10 +176,11 @@ exports.Prisma.TopicScalarFieldEnum = {
   id: 'id',
   title: 'title',
   slug: 'slug',
+  isBookmarked: 'isBookmarked',
   viewCount: 'viewCount',
   attachedProjectId: 'attachedProjectId',
   subcategoryId: 'subcategoryId',
-  userId: 'userId',
+  authorId: 'authorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

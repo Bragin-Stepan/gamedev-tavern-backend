@@ -5202,6 +5202,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     authorId: string | null
+    isBookmarked: boolean | null
     viewCount: number | null
     isGathering: boolean | null
     slug: string | null
@@ -5214,6 +5215,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     authorId: string | null
+    isBookmarked: boolean | null
     viewCount: number | null
     isGathering: boolean | null
     slug: string | null
@@ -5229,6 +5231,7 @@ export namespace Prisma {
     description: number
     contentBlocks: number
     authorId: number
+    isBookmarked: number
     viewCount: number
     isGathering: number
     slug: number
@@ -5251,6 +5254,7 @@ export namespace Prisma {
     title?: true
     description?: true
     authorId?: true
+    isBookmarked?: true
     viewCount?: true
     isGathering?: true
     slug?: true
@@ -5263,6 +5267,7 @@ export namespace Prisma {
     title?: true
     description?: true
     authorId?: true
+    isBookmarked?: true
     viewCount?: true
     isGathering?: true
     slug?: true
@@ -5278,6 +5283,7 @@ export namespace Prisma {
     description?: true
     contentBlocks?: true
     authorId?: true
+    isBookmarked?: true
     viewCount?: true
     isGathering?: true
     slug?: true
@@ -5380,6 +5386,7 @@ export namespace Prisma {
     description: string
     contentBlocks: JsonValue | null
     authorId: string
+    isBookmarked: boolean
     viewCount: number
     isGathering: boolean
     slug: string
@@ -5414,6 +5421,7 @@ export namespace Prisma {
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     isGathering?: boolean
     slug?: boolean
@@ -5436,6 +5444,7 @@ export namespace Prisma {
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     isGathering?: boolean
     slug?: boolean
@@ -5452,6 +5461,7 @@ export namespace Prisma {
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     isGathering?: boolean
     slug?: boolean
@@ -5468,6 +5478,7 @@ export namespace Prisma {
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     isGathering?: boolean
     slug?: boolean
@@ -5475,7 +5486,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "images" | "genres" | "description" | "contentBlocks" | "authorId" | "viewCount" | "isGathering" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "images" | "genres" | "description" | "contentBlocks" | "authorId" | "isBookmarked" | "viewCount" | "isGathering" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     topics?: boolean | Project$topicsArgs<ExtArgs>
@@ -5510,6 +5521,7 @@ export namespace Prisma {
       description: string
       contentBlocks: Prisma.JsonValue | null
       authorId: string
+      isBookmarked: boolean
       viewCount: number
       isGathering: boolean
       slug: string
@@ -5951,6 +5963,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Project", 'String'>
     readonly contentBlocks: FieldRef<"Project", 'Json'>
     readonly authorId: FieldRef<"Project", 'String'>
+    readonly isBookmarked: FieldRef<"Project", 'Boolean'>
     readonly viewCount: FieldRef<"Project", 'Int'>
     readonly isGathering: FieldRef<"Project", 'Boolean'>
     readonly slug: FieldRef<"Project", 'String'>
@@ -6514,10 +6527,11 @@ export namespace Prisma {
     id: string | null
     title: string | null
     slug: string | null
+    isBookmarked: boolean | null
     viewCount: number | null
     attachedProjectId: string | null
     subcategoryId: string | null
-    userId: string | null
+    authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6526,10 +6540,11 @@ export namespace Prisma {
     id: string | null
     title: string | null
     slug: string | null
+    isBookmarked: boolean | null
     viewCount: number | null
     attachedProjectId: string | null
     subcategoryId: string | null
-    userId: string | null
+    authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6538,10 +6553,11 @@ export namespace Prisma {
     id: number
     title: number
     slug: number
+    isBookmarked: number
     viewCount: number
     attachedProjectId: number
     subcategoryId: number
-    userId: number
+    authorId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6560,10 +6576,11 @@ export namespace Prisma {
     id?: true
     title?: true
     slug?: true
+    isBookmarked?: true
     viewCount?: true
     attachedProjectId?: true
     subcategoryId?: true
-    userId?: true
+    authorId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6572,10 +6589,11 @@ export namespace Prisma {
     id?: true
     title?: true
     slug?: true
+    isBookmarked?: true
     viewCount?: true
     attachedProjectId?: true
     subcategoryId?: true
-    userId?: true
+    authorId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6584,10 +6602,11 @@ export namespace Prisma {
     id?: true
     title?: true
     slug?: true
+    isBookmarked?: true
     viewCount?: true
     attachedProjectId?: true
     subcategoryId?: true
-    userId?: true
+    authorId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6683,10 +6702,11 @@ export namespace Prisma {
     id: string
     title: string
     slug: string
+    isBookmarked: boolean
     viewCount: number
     attachedProjectId: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt: Date
     updatedAt: Date
     _count: TopicCountAggregateOutputType | null
@@ -6714,10 +6734,11 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     slug?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     attachedProjectId?: boolean
     subcategoryId?: boolean
-    userId?: boolean
+    authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     comments?: boolean | Topic$commentsArgs<ExtArgs>
@@ -6733,10 +6754,11 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     slug?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     attachedProjectId?: boolean
     subcategoryId?: boolean
-    userId?: boolean
+    authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     attachedProject?: boolean | Topic$attachedProjectArgs<ExtArgs>
@@ -6748,10 +6770,11 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     slug?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     attachedProjectId?: boolean
     subcategoryId?: boolean
-    userId?: boolean
+    authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     attachedProject?: boolean | Topic$attachedProjectArgs<ExtArgs>
@@ -6763,15 +6786,16 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     slug?: boolean
+    isBookmarked?: boolean
     viewCount?: boolean
     attachedProjectId?: boolean
     subcategoryId?: boolean
-    userId?: boolean
+    authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TopicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "viewCount" | "attachedProjectId" | "subcategoryId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["topic"]>
+  export type TopicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "isBookmarked" | "viewCount" | "attachedProjectId" | "subcategoryId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["topic"]>
   export type TopicInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Topic$commentsArgs<ExtArgs>
     bookmarks?: boolean | Topic$bookmarksArgs<ExtArgs>
@@ -6806,10 +6830,11 @@ export namespace Prisma {
       id: string
       title: string
       slug: string
+      isBookmarked: boolean
       viewCount: number
       attachedProjectId: string | null
       subcategoryId: string
-      userId: string
+      authorId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["topic"]>
@@ -7244,10 +7269,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Topic", 'String'>
     readonly title: FieldRef<"Topic", 'String'>
     readonly slug: FieldRef<"Topic", 'String'>
+    readonly isBookmarked: FieldRef<"Topic", 'Boolean'>
     readonly viewCount: FieldRef<"Topic", 'Int'>
     readonly attachedProjectId: FieldRef<"Topic", 'String'>
     readonly subcategoryId: FieldRef<"Topic", 'String'>
-    readonly userId: FieldRef<"Topic", 'String'>
+    readonly authorId: FieldRef<"Topic", 'String'>
     readonly createdAt: FieldRef<"Topic", 'DateTime'>
     readonly updatedAt: FieldRef<"Topic", 'DateTime'>
   }
@@ -19068,6 +19094,7 @@ export namespace Prisma {
     description: 'description',
     contentBlocks: 'contentBlocks',
     authorId: 'authorId',
+    isBookmarked: 'isBookmarked',
     viewCount: 'viewCount',
     isGathering: 'isGathering',
     slug: 'slug',
@@ -19082,10 +19109,11 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     slug: 'slug',
+    isBookmarked: 'isBookmarked',
     viewCount: 'viewCount',
     attachedProjectId: 'attachedProjectId',
     subcategoryId: 'subcategoryId',
-    userId: 'userId',
+    authorId: 'authorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19653,6 +19681,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
+    isBookmarked?: BoolFilter<"Project"> | boolean
     viewCount?: IntFilter<"Project"> | number
     isGathering?: BoolFilter<"Project"> | boolean
     slug?: StringFilter<"Project"> | string
@@ -19674,6 +19703,7 @@ export namespace Prisma {
     description?: SortOrder
     contentBlocks?: SortOrderInput | SortOrder
     authorId?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     isGathering?: SortOrder
     slug?: SortOrder
@@ -19699,6 +19729,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
+    isBookmarked?: BoolFilter<"Project"> | boolean
     viewCount?: IntFilter<"Project"> | number
     isGathering?: BoolFilter<"Project"> | boolean
     createdAt?: DateTimeFilter<"Project"> | Date | string
@@ -19719,6 +19750,7 @@ export namespace Prisma {
     description?: SortOrder
     contentBlocks?: SortOrderInput | SortOrder
     authorId?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     isGathering?: SortOrder
     slug?: SortOrder
@@ -19742,6 +19774,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Project"> | string
     contentBlocks?: JsonNullableWithAggregatesFilter<"Project">
     authorId?: StringWithAggregatesFilter<"Project"> | string
+    isBookmarked?: BoolWithAggregatesFilter<"Project"> | boolean
     viewCount?: IntWithAggregatesFilter<"Project"> | number
     isGathering?: BoolWithAggregatesFilter<"Project"> | boolean
     slug?: StringWithAggregatesFilter<"Project"> | string
@@ -19756,10 +19789,11 @@ export namespace Prisma {
     id?: StringFilter<"Topic"> | string
     title?: StringFilter<"Topic"> | string
     slug?: StringFilter<"Topic"> | string
+    isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
     attachedProjectId?: StringNullableFilter<"Topic"> | string | null
     subcategoryId?: StringFilter<"Topic"> | string
-    userId?: StringFilter<"Topic"> | string
+    authorId?: StringFilter<"Topic"> | string
     createdAt?: DateTimeFilter<"Topic"> | Date | string
     updatedAt?: DateTimeFilter<"Topic"> | Date | string
     comments?: CommentListRelationFilter
@@ -19774,10 +19808,11 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     slug?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     attachedProjectId?: SortOrderInput | SortOrder
     subcategoryId?: SortOrder
-    userId?: SortOrder
+    authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     comments?: CommentOrderByRelationAggregateInput
@@ -19795,10 +19830,11 @@ export namespace Prisma {
     OR?: TopicWhereInput[]
     NOT?: TopicWhereInput | TopicWhereInput[]
     title?: StringFilter<"Topic"> | string
+    isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
     attachedProjectId?: StringNullableFilter<"Topic"> | string | null
     subcategoryId?: StringFilter<"Topic"> | string
-    userId?: StringFilter<"Topic"> | string
+    authorId?: StringFilter<"Topic"> | string
     createdAt?: DateTimeFilter<"Topic"> | Date | string
     updatedAt?: DateTimeFilter<"Topic"> | Date | string
     comments?: CommentListRelationFilter
@@ -19813,10 +19849,11 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     slug?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     attachedProjectId?: SortOrderInput | SortOrder
     subcategoryId?: SortOrder
-    userId?: SortOrder
+    authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TopicCountOrderByAggregateInput
@@ -19833,10 +19870,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Topic"> | string
     title?: StringWithAggregatesFilter<"Topic"> | string
     slug?: StringWithAggregatesFilter<"Topic"> | string
+    isBookmarked?: BoolWithAggregatesFilter<"Topic"> | boolean
     viewCount?: IntWithAggregatesFilter<"Topic"> | number
     attachedProjectId?: StringNullableWithAggregatesFilter<"Topic"> | string | null
     subcategoryId?: StringWithAggregatesFilter<"Topic"> | string
-    userId?: StringWithAggregatesFilter<"Topic"> | string
+    authorId?: StringWithAggregatesFilter<"Topic"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Topic"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Topic"> | Date | string
   }
@@ -20802,6 +20840,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -20823,6 +20862,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -20842,6 +20882,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -20863,6 +20904,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -20883,6 +20925,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -20897,6 +20940,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -20912,6 +20956,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -20923,6 +20968,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20938,10 +20984,11 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutTopicInput
@@ -20953,6 +21000,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20968,10 +21016,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutTopicNestedInput
@@ -20983,10 +21032,11 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20995,6 +21045,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21004,10 +21055,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22146,6 +22198,7 @@ export namespace Prisma {
     description?: SortOrder
     contentBlocks?: SortOrder
     authorId?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     isGathering?: SortOrder
     slug?: SortOrder
@@ -22162,6 +22215,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     authorId?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     isGathering?: SortOrder
     slug?: SortOrder
@@ -22174,6 +22228,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     authorId?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     isGathering?: SortOrder
     slug?: SortOrder
@@ -22199,10 +22254,11 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     slug?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     attachedProjectId?: SortOrder
     subcategoryId?: SortOrder
-    userId?: SortOrder
+    authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22215,10 +22271,11 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     slug?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     attachedProjectId?: SortOrder
     subcategoryId?: SortOrder
-    userId?: SortOrder
+    authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22227,10 +22284,11 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     slug?: SortOrder
+    isBookmarked?: SortOrder
     viewCount?: SortOrder
     attachedProjectId?: SortOrder
     subcategoryId?: SortOrder
-    userId?: SortOrder
+    authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -24340,6 +24398,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -24359,6 +24418,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -24385,6 +24445,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24399,6 +24460,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
@@ -24699,6 +24761,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
+    isBookmarked?: BoolFilter<"Project"> | boolean
     viewCount?: IntFilter<"Project"> | number
     isGathering?: BoolFilter<"Project"> | boolean
     slug?: StringFilter<"Project"> | string
@@ -24729,10 +24792,11 @@ export namespace Prisma {
     id?: StringFilter<"Topic"> | string
     title?: StringFilter<"Topic"> | string
     slug?: StringFilter<"Topic"> | string
+    isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
     attachedProjectId?: StringNullableFilter<"Topic"> | string | null
     subcategoryId?: StringFilter<"Topic"> | string
-    userId?: StringFilter<"Topic"> | string
+    authorId?: StringFilter<"Topic"> | string
     createdAt?: DateTimeFilter<"Topic"> | Date | string
     updatedAt?: DateTimeFilter<"Topic"> | Date | string
   }
@@ -25104,6 +25168,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25118,9 +25183,10 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutTopicInput
@@ -25516,6 +25582,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -25536,6 +25603,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -25710,6 +25778,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -25730,6 +25799,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -25979,6 +26049,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -25999,6 +26070,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26019,6 +26091,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26033,10 +26106,11 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     bookmarks?: BookmarkUncheckedCreateNestedManyWithoutTopicInput
@@ -26188,6 +26262,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26208,6 +26283,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26234,6 +26310,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26248,10 +26325,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bookmarks?: BookmarkUncheckedUpdateManyWithoutTopicNestedInput
@@ -26332,6 +26410,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26352,6 +26431,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26372,6 +26452,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26386,10 +26467,11 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutTopicInput
@@ -26491,6 +26573,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26511,6 +26594,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26537,6 +26621,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26551,10 +26636,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutTopicNestedInput
@@ -26635,6 +26721,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26655,6 +26742,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26675,6 +26763,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26689,10 +26778,11 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutTopicInput
@@ -26794,6 +26884,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26814,6 +26905,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26840,6 +26932,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26854,10 +26947,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutTopicNestedInput
@@ -26871,6 +26965,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26891,6 +26986,7 @@ export namespace Prisma {
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -26925,6 +27021,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -26945,6 +27042,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -27549,6 +27647,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27563,9 +27662,10 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutTopicInput
@@ -27815,6 +27915,7 @@ export namespace Prisma {
     genres?: ProjectCreategenresInput | string[]
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: boolean
     viewCount?: number
     isGathering?: boolean
     slug: string
@@ -27826,6 +27927,7 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
     subcategoryId: string
@@ -27935,6 +28037,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -27954,6 +28057,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -27973,6 +28077,7 @@ export namespace Prisma {
     genres?: ProjectUpdategenresInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     isGathering?: BoolFieldUpdateOperationsInput | boolean
     slug?: StringFieldUpdateOperationsInput | string
@@ -27984,6 +28089,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27998,6 +28104,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
@@ -28012,6 +28119,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
     subcategoryId?: StringFieldUpdateOperationsInput | string
@@ -28151,9 +28259,10 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     subcategoryId: string
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28198,6 +28307,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28212,9 +28322,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutTopicNestedInput
@@ -28226,9 +28337,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     subcategoryId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28647,9 +28759,10 @@ export namespace Prisma {
     id?: string
     title: string
     slug: string
+    isBookmarked?: boolean
     viewCount?: number
     attachedProjectId?: string | null
-    userId: string
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28658,6 +28771,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28672,9 +28786,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutTopicNestedInput
@@ -28686,9 +28801,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
     attachedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

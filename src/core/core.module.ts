@@ -9,12 +9,14 @@ import { PasswordRecoveryModule } from '../modules/auth/password-recovery/passwo
 import { SessionModule } from '../modules/auth/session/session.module';
 import { TotpModule } from '../modules/auth/totp/totp.module';
 import { VerificationModule } from '../modules/auth/verification/verification.module';
+import { BookmarkModule } from '../modules/content/bookmark/bookmark.module';
 import { CategoryModule } from '../modules/content/category/category.module';
 import { SubcategoryModule } from '../modules/content/subcategory/subcategory.module';
 import { CronModule } from '../modules/cron/cron.module';
 import { MailModule } from '../modules/libs/mail/mail.module';
 import { RateLimitModule } from '../modules/libs/rate-limit/rate-limit.module';
 import { StorageModule } from '../modules/libs/storage/storage.module';
+import { ViewModule } from '../modules/libs/view/view.module';
 import { FollowModule } from '../modules/user/follow/follow.module';
 import { ProfileModule } from '../modules/user/profile/profile.module';
 import { SpecializationModule } from '../modules/user/specialization/specialization.module';
@@ -52,7 +54,9 @@ import { RedisModule } from './redis/redis.module';
 		ProfileModule,
 		SpecializationModule,
 		CategoryModule,
-		SubcategoryModule
+		SubcategoryModule,
+		BookmarkModule,
+		ViewModule
 	]
 })
 export class CoreModule {}

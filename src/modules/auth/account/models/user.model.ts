@@ -1,6 +1,8 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import type { RoleType, User } from '@/prisma/generated';
+import { BookmarkModel } from '@/src/modules/content/bookmark/models/bookmark.model';
+import { ViewModel } from '@/src/modules/libs/view/models/view.model';
 import { CandidateCardModel } from '@/src/modules/user/candidate-card/models/candidate-card.model';
 import { FollowModel } from '@/src/modules/user/follow/models/follow.model';
 import { SocialLinkModel } from '@/src/modules/user/profile/models/social-link.model';
