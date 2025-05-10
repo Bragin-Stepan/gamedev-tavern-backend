@@ -25,6 +25,7 @@ model User {
   username String?
   status   String?
   avatar   String?
+  city     String?
 
   candidateCard CandidateCard?
   projects      Project[]
@@ -61,8 +62,7 @@ model CandidateCard {
   information   Json?
   portfolioUrls String[] @map("portfolio_urls")
 
-  hiddenUntil  DateTime? @map("hidden_until")
-  lastPromoted DateTime? @map("last_promoted")
+  lastHoisting DateTime? @map("last_hoisting")
   isHidden     Boolean   @default(false) @map("is_hidden")
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -72,31 +72,6 @@ model CandidateCard {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("candidate_card")
-}
-
-model Topic {
-  id String @id @default(uuid())
-
-  title String
-  slug  String @unique
-
-  comments  Comment[]  @relation("topic_comments")
-  bookmarks Bookmark[] @relation("topic_bookmarks")
-  views     View[]     @relation("topic_views")
-
-  attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
-  attachedProjectId String?  @map("attached_project_id")
-
-  subcategory   Subcategory @relation("subcategory_topics", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  subcategoryId String      @map("subcategory_id")
-
-  author User   @relation("topics", fields: [userId], references: [id])
-  userId String @map("user_id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("topics")
 }
 
 model Project {
@@ -115,13 +90,42 @@ model Project {
   platformsLinks PlatformLink[]
   comments       Comment[]      @relation("project_comments")
   bookmarks      Bookmark[]     @relation("project_bookmarks")
-  views          View[]         @relation("project_views")
+
+  viewCount Int    @default(0)
+  views     View[] @relation("project_views")
 
   isGathering Boolean @default(false) @map("is_gathering")
   slug        String  @unique
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Topic {
+  id String @id @default(uuid())
+
+  title String
+  slug  String @unique
+
+  comments  Comment[]  @relation("topic_comments")
+  bookmarks Bookmark[] @relation("topic_bookmarks")
+
+  views     View[] @relation("topic_views")
+  viewCount Int    @default(0)
+
+  attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
+  attachedProjectId String?  @map("attached_project_id")
+
+  subcategory   Subcategory @relation("subcategory_topics", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  subcategoryId String      @map("subcategory_id")
+
+  author User   @relation("topics", fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("topics")
 }
 
 model Comment {
@@ -169,8 +173,9 @@ model Bookmark {
 model View {
   id String @id @default(uuid())
 
-  viewer   User   @relation(fields: [viewerId], references: [id])
-  viewerId String @map("viewer_id")
+  viewer   User    @relation(fields: [viewerId], references: [id])
+  viewerId String  @map("viewer_id")
+  ip       String?
 
   targetContentType TargetContentType
   targetId          String            @map("target_id")
@@ -319,7 +324,7 @@ enum NotificationType {
   NEW_FOLLOWER
   NEW_SPONSORSHIP
   ENABLE_TWO_FACTOR
-  VERIFIED_CHANNEL
+  VERIFIED_PROFILE
 
   @@map("notification_types")
 }

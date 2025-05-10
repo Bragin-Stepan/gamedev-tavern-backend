@@ -32,6 +32,10 @@ export class ChangeProfileInfoInput {
 	@IsOptional()
 	public iconSpecialization?: string;
 
+	@Field(() => String)
+	@IsOptional()
+	public city?: string;
+
 	@Field(() => SpecializationInput)
 	@IsOptional()
 	public specialization?: SpecializationInput;

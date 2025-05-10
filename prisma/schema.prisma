@@ -25,6 +25,7 @@ model User {
   username String?
   status   String?
   avatar   String?
+  city     String?
 
   candidateCard CandidateCard?
   projects      Project[]
@@ -61,8 +62,7 @@ model CandidateCard {
   information   Json?
   portfolioUrls String[] @map("portfolio_urls")
 
-  hiddenUntil  DateTime? @map("hidden_until")
-  lastPromoted DateTime? @map("last_promoted")
+  lastHoisting DateTime? @map("last_hoisting")
   isHidden     Boolean   @default(false) @map("is_hidden")
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -90,7 +90,9 @@ model Project {
   platformsLinks PlatformLink[]
   comments       Comment[]      @relation("project_comments")
   bookmarks      Bookmark[]     @relation("project_bookmarks")
-  views          View[]         @relation("project_views")
+
+  viewCount Int    @default(0)
+  views     View[] @relation("project_views")
 
   isGathering Boolean @default(false) @map("is_gathering")
   slug        String  @unique
@@ -107,7 +109,9 @@ model Topic {
 
   comments  Comment[]  @relation("topic_comments")
   bookmarks Bookmark[] @relation("topic_bookmarks")
-  views     View[]     @relation("topic_views")
+
+  views     View[] @relation("topic_views")
+  viewCount Int    @default(0)
 
   attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
   attachedProjectId String?  @map("attached_project_id")
@@ -169,8 +173,9 @@ model Bookmark {
 model View {
   id String @id @default(uuid())
 
-  viewer   User   @relation(fields: [viewerId], references: [id])
-  viewerId String @map("viewer_id")
+  viewer   User    @relation(fields: [viewerId], references: [id])
+  viewerId String  @map("viewer_id")
+  ip       String?
 
   targetContentType TargetContentType
   targetId          String            @map("target_id")
@@ -319,7 +324,7 @@ enum NotificationType {
   NEW_FOLLOWER
   NEW_SPONSORSHIP
   ENABLE_TWO_FACTOR
-  VERIFIED_CHANNEL
+  VERIFIED_PROFILE
 
   @@map("notification_types")
 }

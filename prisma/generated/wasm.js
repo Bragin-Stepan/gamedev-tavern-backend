@@ -131,6 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   status: 'status',
   avatar: 'avatar',
+  city: 'city',
   specializationId: 'specializationId',
   iconSpecialization: 'iconSpecialization',
   isVerified: 'isVerified',
@@ -148,20 +149,8 @@ exports.Prisma.CandidateCardScalarFieldEnum = {
   description: 'description',
   information: 'information',
   portfolioUrls: 'portfolioUrls',
-  hiddenUntil: 'hiddenUntil',
-  lastPromoted: 'lastPromoted',
+  lastHoisting: 'lastHoisting',
   isHidden: 'isHidden',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.TopicScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  slug: 'slug',
-  attachedProjectId: 'attachedProjectId',
-  subcategoryId: 'subcategoryId',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -175,8 +164,21 @@ exports.Prisma.ProjectScalarFieldEnum = {
   description: 'description',
   contentBlocks: 'contentBlocks',
   authorId: 'authorId',
+  viewCount: 'viewCount',
   isGathering: 'isGathering',
   slug: 'slug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TopicScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  viewCount: 'viewCount',
+  attachedProjectId: 'attachedProjectId',
+  subcategoryId: 'subcategoryId',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -204,6 +206,7 @@ exports.Prisma.BookmarkScalarFieldEnum = {
 exports.Prisma.ViewScalarFieldEnum = {
   id: 'id',
   viewerId: 'viewerId',
+  ip: 'ip',
   targetContentType: 'targetContentType',
   targetId: 'targetId',
   createdAt: 'createdAt',
@@ -329,8 +332,8 @@ exports.TokenType = exports.$Enums.TokenType = {
 exports.Prisma.ModelName = {
   User: 'User',
   CandidateCard: 'CandidateCard',
-  Topic: 'Topic',
   Project: 'Project',
+  Topic: 'Topic',
   Comment: 'Comment',
   Bookmark: 'Bookmark',
   View: 'View',

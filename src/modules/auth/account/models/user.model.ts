@@ -1,10 +1,9 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import type { RoleType, User } from '@/prisma/generated';
-import { FollowModel } from '@/src/modules/follow/models/follow.model';
 import { CandidateCardModel } from '@/src/modules/user/candidate-card/models/candidate-card.model';
+import { FollowModel } from '@/src/modules/user/follow/models/follow.model';
 import { SocialLinkModel } from '@/src/modules/user/profile/models/social-link.model';
-import { SpecializationModel } from '@/src/modules/user/specialization/models/specialization.model';
 
 @ObjectType()
 export class UserModel implements User {
@@ -25,6 +24,9 @@ export class UserModel implements User {
 
 	@Field(() => String, { nullable: true })
 	public username: string;
+
+	@Field(() => String, { nullable: true })
+	public city: string;
 
 	@Field(() => String, { nullable: true })
 	public iconSpecialization: string;
@@ -49,8 +51,6 @@ export class UserModel implements User {
 
 	@Field(() => [TopicModel])
 	public topics: TopicModel[];
-	// Category
-	// Subcategory
 
 	@Field(() => [CommentModel])
 	public comments: CommentModel[];
@@ -61,8 +61,8 @@ export class UserModel implements User {
 	@Field(() => [ViewModel])
 	public views: ViewModel[];
 
-	@Field(() => SpecializationModel, { nullable: true })
-	public specialization: SpecializationModel;
+	@Field(() => String)
+	public specializationId: string;
 
 	@Field(() => [SocialLinkModel])
 	public socialLinks: SocialLinkModel[];

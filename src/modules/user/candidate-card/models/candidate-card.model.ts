@@ -27,10 +27,7 @@ export class CandidateCardModel implements CandidateCard {
 	public portfolioUrls: string[];
 
 	@Field(() => Date, { nullable: true })
-	public hiddenUntil: Date | null;
-
-	@Field(() => Date, { nullable: true })
-	public lastPromoted: Date | null;
+	public lastHoisting: Date | null;
 
 	@Field(() => Boolean)
 	public isHidden: boolean;

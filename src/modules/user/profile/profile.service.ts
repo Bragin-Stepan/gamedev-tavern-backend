@@ -1,7 +1,8 @@
 import {
 	BadRequestException,
 	ConflictException,
-	Injectable
+	Injectable,
+	NotFoundException
 } from '@nestjs/common';
 import * as Upload from 'graphql-upload/Upload.js';
 import * as sharp from 'sharp';
@@ -12,7 +13,6 @@ import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { StorageService } from '../../libs/storage/storage.service';
 
 import { ChangeProfileInfoInput } from './inputs/change-profile-info.input';
-import { SocialLinkInput } from './inputs/social-link.input';
 
 @Injectable()
 export class ProfileService {
@@ -20,6 +20,25 @@ export class ProfileService {
 		private readonly prismaService: PrismaService,
 		private readonly storageService: StorageService
 	) {}
+
+	public async findByUid(uid: number) {
+		const user = await this.prismaService.user.findUnique({
+			where: { uid, isDeactivated: false },
+			include: {
+				socialLinks: {
+					orderBy: {
+						position: 'asc'
+					}
+				}
+			}
+		});
+
+		if (!user) {
+			throw new NotFoundException('Пользователь не найден');
+		}
+
+		return user;
+	}
 
 	public async changeAvatar(user: User, file: Upload) {
 		if (user.avatar) {
@@ -89,7 +108,8 @@ export class ProfileService {
 			status,
 			socialLinks,
 			iconSpecialization,
-			specialization
+			specialization,
+			city
 		} = input;
 
 		const specializationValid =
@@ -108,10 +128,11 @@ export class ProfileService {
 			data: {
 				username,
 				status,
+				city,
 				iconSpecialization,
 
 				specialization: {
-					delete: true,
+					disconnect: true,
 					connect: { id: specializationValid.id },
 					create: { title: specialization.title }
 				},

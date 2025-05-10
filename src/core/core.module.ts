@@ -9,6 +9,8 @@ import { PasswordRecoveryModule } from '../modules/auth/password-recovery/passwo
 import { SessionModule } from '../modules/auth/session/session.module';
 import { TotpModule } from '../modules/auth/totp/totp.module';
 import { VerificationModule } from '../modules/auth/verification/verification.module';
+import { CategoryModule } from '../modules/content/category/category.module';
+import { SubcategoryModule } from '../modules/content/subcategory/subcategory.module';
 import { CronModule } from '../modules/cron/cron.module';
 import { MailModule } from '../modules/libs/mail/mail.module';
 import { RateLimitModule } from '../modules/libs/rate-limit/rate-limit.module';
@@ -48,7 +50,9 @@ import { RedisModule } from './redis/redis.module';
 		RateLimitModule,
 		FollowModule,
 		ProfileModule,
-		SpecializationModule
+		SpecializationModule,
+		CategoryModule,
+		SubcategoryModule
 	]
 })
 export class CoreModule {}

@@ -19,7 +19,7 @@ export class CandidateCardResolver {
 		return this.candidateCardService.findAll();
 	}
 
-	@Query(() => [CandidateCardModel], { name: 'findAllCandidateCards' })
+	@Query(() => CandidateCardModel, { name: 'findCandidateCardByUserId' })
 	public async findByUserId(@Args('userId') userId: string) {
 		return this.candidateCardService.findByUserId(userId);
 	}
@@ -37,5 +37,11 @@ export class CandidateCardResolver {
 	@Mutation(() => Boolean, { name: 'toggleShowMyCard' })
 	public async toggleShowMyCard(@Authorized() user: User) {
 		return this.candidateCardService.toggleShowMyCard(user);
+	}
+
+	@Authorization()
+	@Mutation(() => Boolean, { name: 'hoistingCard' })
+	public async hoistingCard(@Authorized() user: User) {
+		return this.candidateCardService.hoistingCard(user);
 	}
 }

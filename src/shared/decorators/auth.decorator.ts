@@ -1,7 +1,10 @@
-import { applyDecorators, UseGuards } from '@nestjs/common'
+import { applyDecorators, UseGuards } from '@nestjs/common';
 
-import { GqlAuthGuard } from '../guards/gql-auth.guard'
+import { RoleType } from '@/prisma/generated';
 
-export function Authorization() {
-	return applyDecorators(UseGuards(GqlAuthGuard))
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
+import { RolesGuard } from '../guards/roles.guard';
+
+export function Authorization(...roles: RoleType[]) {
+	return applyDecorators(UseGuards(GqlAuthGuard, new RolesGuard(roles)));
 }

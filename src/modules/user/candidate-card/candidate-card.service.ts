@@ -16,7 +16,7 @@ export class CandidateCardService {
 	public async findAll() {
 		return this.prismaService.candidateCard.findMany({
 			orderBy: {
-				lastPromoted: 'desc'
+				lastHoisting: 'desc'
 			}
 		});
 	}
@@ -52,7 +52,7 @@ export class CandidateCardService {
 	}
 
 	public async toggleShowMyCard(user: User) {
-		const updatedCard = await this.prismaService.$transaction(async tx => {
+		await this.prismaService.$transaction(async tx => {
 			const card = await tx.candidateCard.findFirst({
 				where: { userId: user.id },
 				select: { id: true, isHidden: true, userId: true }
@@ -78,7 +78,27 @@ export class CandidateCardService {
 		return true;
 	}
 
-	public async promoteCard() {}
+	public async hoistingCard(user: User) {
+		const currentUser = await this.prismaService.user.findFirst({
+			where: { id: user.id },
+			select: { id: true, candidateCard: true }
+		});
+
+		if (currentUser.id !== user.id) {
+			throw new ForbiddenException('Вы не можете редактировать эту карточку');
+		}
+
+		if (!currentUser.candidateCard) {
+			throw new NotFoundException('Карточка не найдена');
+		}
+
+		await this.prismaService.candidateCard.update({
+			where: { userId: user.id },
+			data: { lastHoisting: new Date(), isHidden: false }
+		});
+
+		return true;
+	}
 
 	public async changeCard() {}
 
