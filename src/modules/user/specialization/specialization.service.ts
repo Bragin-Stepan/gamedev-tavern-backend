@@ -34,11 +34,11 @@ export class SpecializationService {
 			throw new ConflictException('Специализация уже существует');
 		}
 
-		const specialization = await this.prismaService.specialization.create({
+		await this.prismaService.specialization.create({
 			data: { title, careerPath }
 		});
 
-		return specialization;
+		return true;
 	}
 
 	public async edit() {}

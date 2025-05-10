@@ -1,5 +1,5 @@
 import {
-	ConflictException,
+	ForbiddenException,
 	Injectable,
 	NotFoundException
 } from '@nestjs/common';
@@ -7,7 +7,7 @@ import {
 import { User } from '@/prisma/generated';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 
-import { CreateCandidateCardInput } from './inputs/candidate-card.input';
+import { CandidateCardInput } from './inputs/candidate-card.input';
 
 @Injectable()
 export class CandidateCardService {
@@ -16,30 +16,83 @@ export class CandidateCardService {
 	public async findAll() {
 		return this.prismaService.candidateCard.findMany({
 			orderBy: {
-				createdAt: 'desc'
+				lastPromoted: 'desc'
 			}
 		});
 	}
 
-	public async create(input: CreateCandidateCardInput) {
-		const { title, careerPath } = input;
-
-		if (!careerPath) {
-			throw new NotFoundException('Напровление карьеры не найдено');
-		}
-
-		if (
-			await this.prismaService.candidateCard.findFirst({ where: { title } })
-		) {
-			throw new ConflictException('Специализация уже существует');
-		}
-
-		const candidateCard = await this.prismaService.candidateCard.create({
-			data: { title, careerPath }
-		});
-
-		return candidateCard;
+	public async findByUserId(userId: string) {
+		return this.prismaService.candidateCard
+			.findFirst({
+				where: { userId }
+			})
+			.then(card => {
+				if (!card) {
+					throw new NotFoundException('Карточка не найдена');
+				}
+			});
 	}
 
-	public async edit() {}
+	public async createCard(user: User, input: CandidateCardInput) {
+		const { direction, experience, information, description, portfolioUrls } =
+			input;
+
+		if (!direction) {
+			throw new NotFoundException('Не указано направление');
+		}
+
+		if (!experience) {
+			throw new NotFoundException('Не указан опыт');
+		}
+
+		if (!description) {
+			throw new NotFoundException('Описание не найдено');
+		}
+
+		await this.prismaService.candidateCard.create({
+			data: {
+				direction,
+				experience,
+				information,
+				description,
+				portfolioUrls,
+				userId: user.id
+			}
+		});
+
+		return true;
+	}
+
+	public async toggleShowMyCard(user: User) {
+		const updatedCard = await this.prismaService.$transaction(async tx => {
+			const card = await tx.candidateCard.findFirst({
+				where: { userId: user.id },
+				select: { id: true, isHidden: true, userId: true }
+			});
+
+			if (!card) {
+				throw new NotFoundException('Карточка не найдена');
+			}
+
+			if (card.userId !== user.id) {
+				throw new ForbiddenException('Вы не можете редактировать эту карточку');
+			}
+
+			return tx.candidateCard.update({
+				where: { id: card.id },
+				data: {
+					isHidden: !card.isHidden
+				},
+				select: { isHidden: true }
+			});
+		});
+
+		return true;
+	}
+
+	public async promoteCard() {}
+
+	public async changeCard() {}
+
+	public async changePortfolio() {}
 }

@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import type { RoleType, User } from '@/prisma/generated';
 import { FollowModel } from '@/src/modules/follow/models/follow.model';
+import { CandidateCardModel } from '@/src/modules/user/candidate-card/models/candidate-card.model';
 import { SocialLinkModel } from '@/src/modules/user/profile/models/social-link.model';
 import { SpecializationModel } from '@/src/modules/user/specialization/models/specialization.model';
 

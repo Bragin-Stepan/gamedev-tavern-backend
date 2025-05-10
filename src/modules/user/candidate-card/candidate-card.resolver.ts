@@ -5,7 +5,7 @@ import { Authorization } from '@/src/shared/decorators/auth.decorator';
 import { Authorized } from '@/src/shared/decorators/authorized.decorator';
 
 import { CandidateCardService } from './candidate-card.service';
-import { CreateCandidateCardInput } from './inputs/candidate-card.input';
+import { CandidateCardInput } from './inputs/candidate-card.input';
 import { CandidateCardModel } from './models/candidate-card.model';
 
 @Resolver('CandidateCard')
@@ -19,11 +19,23 @@ export class CandidateCardResolver {
 		return this.candidateCardService.findAll();
 	}
 
+	@Query(() => [CandidateCardModel], { name: 'findAllCandidateCards' })
+	public async findByUserId(@Args('userId') userId: string) {
+		return this.candidateCardService.findByUserId(userId);
+	}
+
 	@Authorization()
 	@Mutation(() => Boolean, { name: 'createCandidateCard' })
 	public async createCandidateCard(
-		@Args('data') input: CreateCandidateCardInput
+		@Authorized() user: User,
+		@Args('data') input: CandidateCardInput
 	) {
-		return this.candidateCardService.create(input);
+		return this.candidateCardService.createCard(user, input);
+	}
+
+	@Authorization()
+	@Mutation(() => Boolean, { name: 'toggleShowMyCard' })
+	public async toggleShowMyCard(@Authorized() user: User) {
+		return this.candidateCardService.toggleShowMyCard(user);
 	}
 }

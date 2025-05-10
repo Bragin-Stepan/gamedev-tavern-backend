@@ -74,31 +74,6 @@ model CandidateCard {
   @@map("candidate_card")
 }
 
-model Topic {
-  id String @id @default(uuid())
-
-  title String
-  slug  String @unique
-
-  comments  Comment[]  @relation("topic_comments")
-  bookmarks Bookmark[] @relation("topic_bookmarks")
-  views     View[]     @relation("topic_views")
-
-  attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
-  attachedProjectId String?  @map("attached_project_id")
-
-  subcategory   Subcategory @relation("subcategory_topics", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  subcategoryId String      @map("subcategory_id")
-
-  author User   @relation("topics", fields: [userId], references: [id])
-  userId String @map("user_id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("topics")
-}
-
 model Project {
   id String @id @default(uuid())
 
@@ -122,6 +97,31 @@ model Project {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Topic {
+  id String @id @default(uuid())
+
+  title String
+  slug  String @unique
+
+  comments  Comment[]  @relation("topic_comments")
+  bookmarks Bookmark[] @relation("topic_bookmarks")
+  views     View[]     @relation("topic_views")
+
+  attachedProject   Project? @relation(fields: [attachedProjectId], references: [id])
+  attachedProjectId String?  @map("attached_project_id")
+
+  subcategory   Subcategory @relation("subcategory_topics", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  subcategoryId String      @map("subcategory_id")
+
+  author User   @relation("topics", fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("topics")
 }
 
 model Comment {
