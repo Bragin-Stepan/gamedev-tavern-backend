@@ -1,22 +1,25 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 import { GraphQLJSON } from 'graphql-scalars';
 
 @InputType()
 export class CandidateCardInput {
 	@Field(() => String)
 	@IsString()
-	@IsNotEmpty()
+	@MaxLength(300, { message: 'Максимальная длина 300 символов' })
+	@IsNotEmpty({ message: 'Не указана направление' })
 	public direction: string;
 
 	@Field(() => String)
 	@IsString()
-	@IsNotEmpty()
+	@MaxLength(300, { message: 'Максимальная длина 300 символов' })
+	@IsNotEmpty({ message: 'Не указан опыт' })
 	public experience: string;
 
 	@Field(() => String)
 	@IsString()
-	@IsNotEmpty()
+	@MaxLength(300, { message: 'Максимальная длина 300 символов' })
+	@IsNotEmpty({ message: 'Не указано описание' })
 	public description: string;
 
 	@Field(() => GraphQLJSON, { nullable: true })

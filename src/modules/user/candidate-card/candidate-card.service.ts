@@ -37,18 +37,6 @@ export class CandidateCardService {
 		const { direction, experience, information, description, portfolioUrls } =
 			input;
 
-		if (!direction) {
-			throw new NotFoundException('Не указано направление');
-		}
-
-		if (!experience) {
-			throw new NotFoundException('Не указан опыт');
-		}
-
-		if (!description) {
-			throw new NotFoundException('Описание не найдено');
-		}
-
 		await this.prismaService.candidateCard.create({
 			data: {
 				direction,
