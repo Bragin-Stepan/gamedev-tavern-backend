@@ -175,6 +175,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
 exports.Prisma.TopicScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  contentBlocks: 'contentBlocks',
   slug: 'slug',
   isBookmarked: 'isBookmarked',
   viewCount: 'viewCount',
@@ -287,6 +288,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 

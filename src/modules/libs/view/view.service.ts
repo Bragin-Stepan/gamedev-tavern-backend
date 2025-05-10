@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import type { Request } from 'express';
 
 import { TargetContentType } from '@/prisma/generated';
@@ -136,7 +136,7 @@ export class ViewService {
 				});
 				break;
 			default:
-				throw new Error('Невалидный тип контента для просмотра');
+				throw new NotFoundException('Невалидный тип контента для просмотра');
 		}
 	}
 

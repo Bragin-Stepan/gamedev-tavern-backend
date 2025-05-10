@@ -13,123 +13,83 @@ export class BookmarkService {
 	private readonly cacheKeyPrefix = 'bookmark:';
 
 	constructor(
-		private readonly prisma: PrismaService,
+		private readonly prismaService: PrismaService,
 		private readonly redis: RedisService
 	) {}
 
 	async toggleBookmark(userId: string, input: BookmarkInput): Promise<boolean> {
-		await this.verifyContentExists(input.targetContentType, input.targetId);
+		const { targetContentType, targetId } = input;
+		await this.verifyContentExists(targetContentType, targetId);
 
-		const existingBookmark = await this.prisma.bookmark.findUnique({
+		const existingBookmark = await this.prismaService.bookmark.findUnique({
 			where: {
 				userId_targetContentType_targetId: {
 					userId,
-					targetContentType: input.targetContentType,
-					targetId: input.targetId
+					targetContentType: targetContentType,
+					targetId: targetId
 				}
 			}
 		});
 
 		if (existingBookmark) {
-			await this.prisma.bookmark.delete({
+			await this.prismaService.bookmark.delete({
 				where: {
 					userId_targetContentType_targetId: {
 						userId,
-						targetContentType: input.targetContentType,
-						targetId: input.targetId
+						targetContentType: targetContentType,
+						targetId: targetId
 					}
 				}
 			});
 
-			await this.updateTargetBookmarkStatus(
-				input.targetContentType,
-				input.targetId,
-				false
-			);
+			await this.updateTargetBookmarkStatus(targetContentType, targetId, false);
+			await this.invalidateCache(userId, targetContentType, targetId);
 
-			await this.invalidateCache(
-				userId,
-				input.targetContentType,
-				input.targetId
-			);
 			return false;
 		} else {
-			await this.prisma.bookmark.create({
+			await this.prismaService.bookmark.create({
 				data: {
 					userId,
-					targetContentType: input.targetContentType,
-					targetId: input.targetId
+					targetContentType: targetContentType,
+					targetId: targetId
 				}
 			});
 
-			await this.updateTargetBookmarkStatus(
-				input.targetContentType,
-				input.targetId,
-				true
-			);
+			await this.updateTargetBookmarkStatus(targetContentType, targetId, true);
+			await this.invalidateCache(userId, targetContentType, targetId);
 
-			await this.invalidateCache(
-				userId,
-				input.targetContentType,
-				input.targetId
-			);
 			return true;
 		}
 	}
 
-	// async findByUser(userId: string): Promise<BookmarkModel[]> {
-	// 	const cacheKey = `${this.cacheKeyPrefix}user:${userId}`;
+	async findMyBookmarks(userId: string) {
+		const cacheKey = `${this.cacheKeyPrefix}user:${userId}`;
 
-	// 	try {
-	// 		const cached = await this.redis.get(cacheKey);
-	// 		if (cached) {
-	// 			return JSON.parse(cached);
-	// 		}
+		try {
+			const cached = await this.redis.get(cacheKey);
+			if (cached) {
+				return JSON.parse(cached);
+			}
 
-	// 		const bookmarks = await this.prisma.bookmark.findMany({
-	// 			where: { userId },
-	// 			orderBy: { createdAt: 'desc' }
-	// 		});
+			const bookmarks = await this.prismaService.bookmark.findMany({
+				where: { userId },
+				orderBy: { createdAt: 'desc' },
+				include: {
+					user: true,
+					topic: true,
+					project: true
+				}
+			});
 
-	// 		await this.redis.set(cacheKey, JSON.stringify(bookmarks), 'EX', 3600);
-	// 		return bookmarks;
-	// 	} catch (error) {
-	// 		this.logger.error(
-	// 			`Ошибка получения избранных по пользователю: ${error.message}`
-	// 		);
-	// 		throw error;
-	// 	}
-	// }
-
-	// async checkBookmark(
-	// 	userId: string,
-	// 	targetContentType: TargetContentType,
-	// 	targetId: string
-	// ): Promise<boolean> {
-	// 	const cacheKey = `${this.cacheKeyPrefix}check:${userId}:${targetContentType}:${targetId}`;
-
-	// 	try {
-	// 		const cached = await this.redis.get(cacheKey);
-	// 		if (cached) {
-	// 			return JSON.parse(cached);
-	// 		}
-
-	// 		const count = await this.prisma.bookmark.count({
-	// 			where: {
-	// 				userId,
-	// 				targetContentType,
-	// 				targetId
-	// 			}
-	// 		});
-
-	// 		const result = count > 0;
-	// 		await this.redis.set(cacheKey, JSON.stringify(result), 'EX', 300);
-	// 		return result;
-	// 	} catch (error) {
-	// 		this.logger.error(`Ошибка проверки избранного: ${error.message}`);
-	// 		throw error;
-	// 	}
-	// }
+			await this.redis.set(cacheKey, JSON.stringify(bookmarks), 'EX', 3600);
+			return bookmarks;
+		} catch (error) {
+			this.logger.error(
+				`Ошибка получения избранных по пользователю: ${error.message}`
+			);
+			throw error;
+		}
+	}
 
 	private async verifyContentExists(
 		targetContentType: TargetContentType,
@@ -137,12 +97,12 @@ export class BookmarkService {
 	): Promise<void> {
 		switch (targetContentType) {
 			case TargetContentType.PROJECT:
-				await this.prisma.project.findUniqueOrThrow({
+				await this.prismaService.project.findUniqueOrThrow({
 					where: { id: targetId }
 				});
 				break;
 			case TargetContentType.TOPIC:
-				await this.prisma.topic.findUniqueOrThrow({
+				await this.prismaService.topic.findUniqueOrThrow({
 					where: { id: targetId }
 				});
 				break;
@@ -160,13 +120,13 @@ export class BookmarkService {
 	): Promise<void> {
 		switch (targetContentType) {
 			case TargetContentType.PROJECT:
-				await this.prisma.project.update({
+				await this.prismaService.project.update({
 					where: { id: targetId },
 					data: { isBookmarked }
 				});
 				break;
 			case TargetContentType.TOPIC:
-				await this.prisma.topic.update({
+				await this.prismaService.topic.update({
 					where: { id: targetId },
 					data: { isBookmarked }
 				});

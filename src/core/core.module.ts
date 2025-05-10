@@ -12,6 +12,7 @@ import { VerificationModule } from '../modules/auth/verification/verification.mo
 import { BookmarkModule } from '../modules/content/bookmark/bookmark.module';
 import { CategoryModule } from '../modules/content/category/category.module';
 import { SubcategoryModule } from '../modules/content/subcategory/subcategory.module';
+import { TopicModule } from '../modules/content/topic/topic.module';
 import { CronModule } from '../modules/cron/cron.module';
 import { MailModule } from '../modules/libs/mail/mail.module';
 import { RateLimitModule } from '../modules/libs/rate-limit/rate-limit.module';
@@ -56,7 +57,8 @@ import { RedisModule } from './redis/redis.module';
 		CategoryModule,
 		SubcategoryModule,
 		BookmarkModule,
-		ViewModule
+		ViewModule,
+		TopicModule
 	]
 })
 export class CoreModule {}

@@ -6552,6 +6552,7 @@ export namespace Prisma {
   export type TopicCountAggregateOutputType = {
     id: number
     title: number
+    contentBlocks: number
     slug: number
     isBookmarked: number
     viewCount: number
@@ -6601,6 +6602,7 @@ export namespace Prisma {
   export type TopicCountAggregateInputType = {
     id?: true
     title?: true
+    contentBlocks?: true
     slug?: true
     isBookmarked?: true
     viewCount?: true
@@ -6701,6 +6703,7 @@ export namespace Prisma {
   export type TopicGroupByOutputType = {
     id: string
     title: string
+    contentBlocks: JsonValue
     slug: string
     isBookmarked: boolean
     viewCount: number
@@ -6733,6 +6736,7 @@ export namespace Prisma {
   export type TopicSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    contentBlocks?: boolean
     slug?: boolean
     isBookmarked?: boolean
     viewCount?: boolean
@@ -6753,6 +6757,7 @@ export namespace Prisma {
   export type TopicSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    contentBlocks?: boolean
     slug?: boolean
     isBookmarked?: boolean
     viewCount?: boolean
@@ -6769,6 +6774,7 @@ export namespace Prisma {
   export type TopicSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    contentBlocks?: boolean
     slug?: boolean
     isBookmarked?: boolean
     viewCount?: boolean
@@ -6785,6 +6791,7 @@ export namespace Prisma {
   export type TopicSelectScalar = {
     id?: boolean
     title?: boolean
+    contentBlocks?: boolean
     slug?: boolean
     isBookmarked?: boolean
     viewCount?: boolean
@@ -6795,7 +6802,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TopicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "isBookmarked" | "viewCount" | "attachedProjectId" | "subcategoryId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["topic"]>
+  export type TopicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "contentBlocks" | "slug" | "isBookmarked" | "viewCount" | "attachedProjectId" | "subcategoryId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["topic"]>
   export type TopicInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Topic$commentsArgs<ExtArgs>
     bookmarks?: boolean | Topic$bookmarksArgs<ExtArgs>
@@ -6829,6 +6836,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
+      contentBlocks: Prisma.JsonValue
       slug: string
       isBookmarked: boolean
       viewCount: number
@@ -7268,6 +7276,7 @@ export namespace Prisma {
   interface TopicFieldRefs {
     readonly id: FieldRef<"Topic", 'String'>
     readonly title: FieldRef<"Topic", 'String'>
+    readonly contentBlocks: FieldRef<"Topic", 'Json'>
     readonly slug: FieldRef<"Topic", 'String'>
     readonly isBookmarked: FieldRef<"Topic", 'Boolean'>
     readonly viewCount: FieldRef<"Topic", 'Int'>
@@ -19108,6 +19117,7 @@ export namespace Prisma {
   export const TopicScalarFieldEnum: {
     id: 'id',
     title: 'title',
+    contentBlocks: 'contentBlocks',
     slug: 'slug',
     isBookmarked: 'isBookmarked',
     viewCount: 'viewCount',
@@ -19260,6 +19270,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -19788,6 +19805,7 @@ export namespace Prisma {
     NOT?: TopicWhereInput | TopicWhereInput[]
     id?: StringFilter<"Topic"> | string
     title?: StringFilter<"Topic"> | string
+    contentBlocks?: JsonFilter<"Topic">
     slug?: StringFilter<"Topic"> | string
     isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
@@ -19807,6 +19825,7 @@ export namespace Prisma {
   export type TopicOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
+    contentBlocks?: SortOrder
     slug?: SortOrder
     isBookmarked?: SortOrder
     viewCount?: SortOrder
@@ -19830,6 +19849,7 @@ export namespace Prisma {
     OR?: TopicWhereInput[]
     NOT?: TopicWhereInput | TopicWhereInput[]
     title?: StringFilter<"Topic"> | string
+    contentBlocks?: JsonFilter<"Topic">
     isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
     attachedProjectId?: StringNullableFilter<"Topic"> | string | null
@@ -19848,6 +19868,7 @@ export namespace Prisma {
   export type TopicOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
+    contentBlocks?: SortOrder
     slug?: SortOrder
     isBookmarked?: SortOrder
     viewCount?: SortOrder
@@ -19869,6 +19890,7 @@ export namespace Prisma {
     NOT?: TopicScalarWhereWithAggregatesInput | TopicScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Topic"> | string
     title?: StringWithAggregatesFilter<"Topic"> | string
+    contentBlocks?: JsonWithAggregatesFilter<"Topic">
     slug?: StringWithAggregatesFilter<"Topic"> | string
     isBookmarked?: BoolWithAggregatesFilter<"Topic"> | boolean
     viewCount?: IntWithAggregatesFilter<"Topic"> | number
@@ -20967,6 +20989,7 @@ export namespace Prisma {
   export type TopicCreateInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -20983,6 +21006,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -20999,6 +21023,7 @@ export namespace Prisma {
   export type TopicUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -21015,6 +21040,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -21031,6 +21057,7 @@ export namespace Prisma {
   export type TopicCreateManyInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -21044,6 +21071,7 @@ export namespace Prisma {
   export type TopicUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -21054,6 +21082,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -22239,6 +22268,29 @@ export namespace Prisma {
   export type ProjectSumOrderByAggregateInput = {
     viewCount?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ProjectNullableScalarRelationFilter = {
     is?: ProjectWhereInput | null
@@ -22253,6 +22305,7 @@ export namespace Prisma {
   export type TopicCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    contentBlocks?: SortOrder
     slug?: SortOrder
     isBookmarked?: SortOrder
     viewCount?: SortOrder
@@ -22295,6 +22348,32 @@ export namespace Prisma {
 
   export type TopicSumOrderByAggregateInput = {
     viewCount?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type EnumTargetContentTypeFilter<$PrismaModel = never> = {
@@ -24252,6 +24331,29 @@ export namespace Prisma {
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedEnumTargetContentTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TargetContentType | EnumTargetContentTypeFieldRefInput<$PrismaModel>
@@ -24444,6 +24546,7 @@ export namespace Prisma {
   export type TopicCreateWithoutAuthorInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -24459,6 +24562,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutAuthorInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -24791,6 +24895,7 @@ export namespace Prisma {
     NOT?: TopicScalarWhereInput | TopicScalarWhereInput[]
     id?: StringFilter<"Topic"> | string
     title?: StringFilter<"Topic"> | string
+    contentBlocks?: JsonFilter<"Topic">
     slug?: StringFilter<"Topic"> | string
     isBookmarked?: BoolFilter<"Topic"> | boolean
     viewCount?: IntFilter<"Topic"> | number
@@ -25167,6 +25272,7 @@ export namespace Prisma {
   export type TopicCreateWithoutAttachedProjectInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -25182,6 +25288,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutAttachedProjectInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26090,6 +26197,7 @@ export namespace Prisma {
   export type TopicCreateWithoutCommentsInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26105,6 +26213,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutCommentsInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26309,6 +26418,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -26324,6 +26434,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -26451,6 +26562,7 @@ export namespace Prisma {
   export type TopicCreateWithoutBookmarksInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26466,6 +26578,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutBookmarksInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26620,6 +26733,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutBookmarksInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -26635,6 +26749,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutBookmarksInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -26762,6 +26877,7 @@ export namespace Prisma {
   export type TopicCreateWithoutViewsInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26777,6 +26893,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutViewsInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -26931,6 +27048,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutViewsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -26946,6 +27064,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutViewsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -27646,6 +27765,7 @@ export namespace Prisma {
   export type TopicCreateWithoutSubcategoryInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -27661,6 +27781,7 @@ export namespace Prisma {
   export type TopicUncheckedCreateWithoutSubcategoryInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -27926,6 +28047,7 @@ export namespace Prisma {
   export type TopicCreateManyAuthorInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -28088,6 +28210,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28103,6 +28226,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28118,6 +28242,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28258,6 +28383,7 @@ export namespace Prisma {
   export type TopicCreateManyAttachedProjectInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -28306,6 +28432,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutAttachedProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28321,6 +28448,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutAttachedProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28336,6 +28464,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateManyWithoutAttachedProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28758,6 +28887,7 @@ export namespace Prisma {
   export type TopicCreateManySubcategoryInput = {
     id?: string
     title: string
+    contentBlocks: JsonNullValueInput | InputJsonValue
     slug: string
     isBookmarked?: boolean
     viewCount?: number
@@ -28770,6 +28900,7 @@ export namespace Prisma {
   export type TopicUpdateWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28785,6 +28916,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
@@ -28800,6 +28932,7 @@ export namespace Prisma {
   export type TopicUncheckedUpdateManyWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    contentBlocks?: JsonNullValueInput | InputJsonValue
     slug?: StringFieldUpdateOperationsInput | string
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
     viewCount?: IntFieldUpdateOperationsInput | number
