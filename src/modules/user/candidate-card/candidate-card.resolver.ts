@@ -4,9 +4,9 @@ import type { User } from '@/prisma/generated';
 import { Authorization } from '@/src/shared/decorators/auth.decorator';
 import { Authorized } from '@/src/shared/decorators/authorized.decorator';
 
-import { CandidateCardService } from './canditate-card.service';
-import { CreateCandidateCardInput } from './inputs/canditate-card.input';
-import { CandidateCardModel } from './models/canditate-card.model';
+import { CandidateCardService } from './candidate-card.service';
+import { CreateCandidateCardInput } from './inputs/candidate-card.input';
+import { CandidateCardModel } from './models/candidate-card.model';
 
 @Resolver('CandidateCard')
 export class CandidateCardResolver {

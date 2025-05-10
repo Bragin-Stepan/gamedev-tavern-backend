@@ -7,7 +7,7 @@ import {
 import { User } from '@/prisma/generated';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 
-import { CreateCandidateCardInput } from './inputs/canditate-card.input';
+import { CreateCandidateCardInput } from './inputs/candidate-card.input';
 
 @Injectable()
 export class CandidateCardService {

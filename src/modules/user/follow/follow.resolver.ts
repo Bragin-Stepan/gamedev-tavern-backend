@@ -24,20 +24,20 @@ export class FollowResolver {
 	}
 
 	@Authorization()
-	@Mutation(() => Boolean, { name: 'followChannel' })
+	@Mutation(() => Boolean, { name: 'followProfile' })
 	public async follow(
 		@Authorized() user: User,
-		@Args('channelId') channelId: string
+		@Args('profilelId') profilelId: string
 	) {
-		return this.followService.follow(user, channelId);
+		return this.followService.follow(user, profilelId);
 	}
 
 	@Authorization()
-	@Mutation(() => Boolean, { name: 'unfollowChannel' })
+	@Mutation(() => Boolean, { name: 'unfollowProfile' })
 	public async unfollow(
 		@Authorized() user: User,
-		@Args('channelId') channelId: string
+		@Args('profilelId') profilelId: string
 	) {
-		return this.followService.unfollow(user, channelId);
+		return this.followService.unfollow(user, profilelId);
 	}
 }

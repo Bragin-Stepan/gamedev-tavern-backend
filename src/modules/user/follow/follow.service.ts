@@ -43,61 +43,61 @@ export class FollowService {
 		return followings;
 	}
 
-	public async follow(user: User, channelId: string) {
-		const channel = await this.prismaService.user.findUnique({
+	public async follow(user: User, profilelId: string) {
+		const profile = await this.prismaService.user.findUnique({
 			where: {
-				id: channelId
+				id: profilelId
 			}
 		});
 
-		if (!channel) {
-			throw new NotFoundException('Канал не найден');
+		if (!profile) {
+			throw new NotFoundException('Профиль не найден');
 		}
 
-		if (channel.id === user.id) {
+		if (profile.id === user.id) {
 			throw new ConflictException('Нельзя подписаться на себя');
 		}
 
 		const existingFollow = await this.prismaService.follow.findFirst({
 			where: {
 				followerId: user.id,
-				followingId: channel.id
+				followingId: profile.id
 			}
 		});
 
 		if (existingFollow) {
-			throw new ConflictException('Вы уже подписаны на этот канал');
+			throw new ConflictException('Вы уже подписаны на этот профиль');
 		}
 
 		const follow = await this.prismaService.follow.create({
 			data: {
 				followerId: user.id,
-				followingId: channel.id
+				followingId: profile.id
 			}
 		});
 
 		return true;
 	}
 
-	public async unfollow(user: User, channelId: string) {
-		const channel = await this.prismaService.user.findUnique({
+	public async unfollow(user: User, profilelId: string) {
+		const profile = await this.prismaService.user.findUnique({
 			where: {
-				id: channelId
+				id: profilelId
 			}
 		});
 
-		if (!channel) {
+		if (!profile) {
 			throw new NotFoundException('Канал не найден');
 		}
 
-		if (channel.id === user.id) {
-			throw new ConflictException('Нельзя отписаться на себя');
+		if (profile.id === user.id) {
+			throw new ConflictException('Нельзя отписаться отсебя');
 		}
 
 		const existingFollow = await this.prismaService.follow.findFirst({
 			where: {
 				followerId: user.id,
-				followingId: channel.id
+				followingId: profile.id
 			}
 		});
 
@@ -109,7 +109,7 @@ export class FollowService {
 			where: {
 				id: existingFollow.id,
 				followerId: user.id,
-				followingId: channel.id
+				followingId: profile.id
 			}
 		});
 
