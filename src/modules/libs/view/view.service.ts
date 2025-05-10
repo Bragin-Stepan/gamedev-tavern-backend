@@ -27,45 +27,30 @@ export class ViewService {
 		userAgent: string
 	): Promise<boolean> {
 		const { targetContentType, targetId } = input;
-
 		await this.verifyContentExists(targetContentType, targetId);
-		const metadata = getSessionMetadata(req, userAgent);
 
+		const metadata = getSessionMetadata(req, userAgent);
 		const ipCacheKey = `${this.ipCachePrefix}${targetContentType}:${targetId}:${metadata.ip}`;
-		const hasViewed = await this.redis.get(ipCacheKey);
+
+		const hasViewed = await this.hasViewedFromIp(
+			targetContentType,
+			targetId,
+			metadata.ip
+		);
 
 		if (hasViewed) {
+			await this.updateLastViewTime(targetContentType, targetId, metadata.ip);
 			return false;
 		}
 
-		const existingView = await this.prisma.view.findFirst({
-			where: {
-				targetContentType,
-				targetId,
-				ip: metadata.ip
-			}
-		});
+		await this.createViewRecord(
+			viewerId,
+			targetContentType,
+			targetId,
+			metadata.ip
+		);
 
-		if (existingView) {
-			await this.prisma.view.update({
-				where: { id: existingView.id },
-				data: { updatedAt: new Date() }
-			});
-
-			await this.redis.set(ipCacheKey, '1', 'EX', 86400); // 24 часа
-			return false;
-		}
-
-		await this.prisma.view.create({
-			data: {
-				viewerId: viewerId,
-				ip: metadata.ip,
-				targetContentType: targetContentType,
-				targetId: targetId
-			}
-		});
-
-		await this.redis.set(ipCacheKey, '1', 'EX', 86400); // 24 часа
+		await this.redis.set(ipCacheKey, '1', 'EX', 86400);
 
 		await this.incrementViewCount(targetContentType, targetId);
 		await this.invalidateCache(targetContentType, targetId);
@@ -81,23 +66,17 @@ export class ViewService {
 
 		try {
 			const cached = await this.redis.get(cacheKey);
-			if (cached) {
-				return parseInt(cached, 10);
-			}
+			if (cached) return parseInt(cached, 10);
 
-			const uniqueIps = await this.prisma.view.groupBy({
+			const uniqueViews = await this.prisma.view.groupBy({
 				by: ['ip'],
 				where: {
 					targetContentType,
 					targetId
-				},
-				_count: {
-					ip: true
 				}
 			});
 
-			const count = uniqueIps.length;
-
+			const count = uniqueViews.length;
 			await this.redis.set(cacheKey, count.toString(), 'EX', 300);
 			return count;
 		} catch (error) {
@@ -117,22 +96,16 @@ export class ViewService {
 
 		try {
 			const cached = await this.redis.get(cacheKey);
-			if (cached) {
-				return JSON.parse(cached);
-			}
+			if (cached) return JSON.parse(cached);
 
 			const views = await this.prisma.view.findMany({
-				where: {
-					targetContentType,
-					targetId
-				},
-				orderBy: {
-					createdAt: 'desc'
-				},
-				take: limit
+				where: { targetContentType, targetId },
+				orderBy: { updatedAt: 'desc' },
+				take: limit,
+				distinct: ['ip']
 			});
 
-			await this.redis.set(cacheKey, JSON.stringify(views), 'EX', 300); // 5 minute cache
+			await this.redis.set(cacheKey, JSON.stringify(views), 'EX', 300);
 			return views;
 		} catch (error) {
 			this.logger.error(
@@ -211,5 +184,65 @@ export class ViewService {
 		if (keys.length > 0) {
 			await this.redis.del(...keys);
 		}
+	}
+
+	private async hasViewedFromIp(
+		targetContentType: TargetContentType,
+		targetId: string,
+		ip: string
+	): Promise<boolean> {
+		const ipCacheKey = `${this.ipCachePrefix}${targetContentType}:${targetId}:${ip}`;
+
+		const cachedView = await this.redis.get(ipCacheKey);
+		if (cachedView) return true;
+
+		const viewCount = await this.prisma.view.count({
+			where: {
+				targetContentType,
+				targetId,
+				ip
+			}
+		});
+
+		if (viewCount > 0) {
+			await this.redis.set(ipCacheKey, '1', 'EX', 86400);
+			return true;
+		}
+
+		return false;
+	}
+
+	private async updateLastViewTime(
+		targetContentType: TargetContentType,
+		targetId: string,
+		ip: string
+	): Promise<void> {
+		await this.prisma.view.updateMany({
+			where: {
+				targetContentType,
+				targetId,
+				ip
+			},
+			data: {
+				updatedAt: new Date()
+			}
+		});
+	}
+
+	private async createViewRecord(
+		viewerId: string | null,
+		targetContentType: TargetContentType,
+		targetId: string,
+		ip: string
+	): Promise<void> {
+		await this.prisma.view.create({
+			data: {
+				viewerId,
+				ip,
+				targetContentType,
+				targetId,
+				updatedAt: new Date()
+			}
+		});
 	}
 }
