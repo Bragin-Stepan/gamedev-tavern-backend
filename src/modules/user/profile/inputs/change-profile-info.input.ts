@@ -26,12 +26,13 @@ export class ChangeProfileInfoInput {
 
 	@IsOptional()
 	@Field(() => [SocialLinkInput])
-	public socialLinks: SocialLinkInput[];
+	public socialLinks?: SocialLinkInput[];
 
 	@Field(() => String)
 	@IsOptional()
 	public iconSpecialization?: string;
 
 	@Field(() => SpecializationInput)
-	public specialization: SpecializationInput;
+	@IsOptional()
+	public specialization?: SpecializationInput;
 }

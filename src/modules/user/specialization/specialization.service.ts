@@ -37,6 +37,8 @@ export class SpecializationService {
 		const specialization = await this.prismaService.specialization.create({
 			data: { title, careerPath }
 		});
+
+		return specialization;
 	}
 
 	public async edit() {}

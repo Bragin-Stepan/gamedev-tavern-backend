@@ -14,8 +14,8 @@ import { FollowModule } from '../modules/follow/follow.module';
 import { MailModule } from '../modules/libs/mail/mail.module';
 import { RateLimitModule } from '../modules/libs/rate-limit/rate-limit.module';
 import { StorageModule } from '../modules/libs/storage/storage.module';
-import { ProfileModule } from '../modules/profile/profile.module';
-import { SpecializationModule } from '../modules/specialization/specialization.module';
+import { ProfileModule } from '../modules/user/profile/profile.module';
+import { SpecializationModule } from '../modules/user/specialization/specialization.module';
 import { IS_DEV_ENV } from '../shared/utils/is-dev.util';
 
 import { getGraphQLConfig } from './config/graphql.config';

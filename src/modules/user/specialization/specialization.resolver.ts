@@ -21,7 +21,7 @@ export class SpecializationResolver {
 
 	@Authorization()
 	@Mutation(() => Boolean, { name: 'createSpecialization' })
-	public async reateSpecialization(
+	public async createSpecialization(
 		@Args('data') input: CreateSpecializationInput
 	) {
 		return this.specializationService.create(input);
