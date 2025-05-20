@@ -10,8 +10,6 @@ import { FileValidationPipe } from '@/src/shared/pipes/file-validation.pipe';
 import { UserModel } from '../../auth/account/models/user.model';
 
 import { ChangeProfileInfoInput } from './inputs/change-profile-info.input';
-import { SocialLinkInput } from './inputs/social-link.input';
-// import { SocialLinkModel } from './models/social-link.model';
 import { ProfileService } from './profile.service';
 
 @Resolver('Profile')
@@ -19,7 +17,7 @@ export class ProfileResolver {
 	public constructor(private readonly profileService: ProfileService) {}
 
 	@Query(() => UserModel, { name: 'findProfileByUid' })
-	public async findById(@Args('uid') uid: number) {
+	public async findByUid(@Args('uid') uid: number) {
 		return this.profileService.findByUid(uid);
 	}
 

@@ -1,15 +1,20 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class PaginationInput {
-	@Field(() => Int, { defaultValue: 1 })
-	@IsOptional()
+	@Field(() => Int, { nullable: true })
 	@IsNumber()
-	page: number;
+	@IsOptional()
+	public take?: number;
 
-	@Field(() => Int, { defaultValue: 10 })
-	@IsOptional()
+	@Field(() => Int, { nullable: true })
 	@IsNumber()
-	limit: number;
+	@IsOptional()
+	public skip?: number;
+
+	@Field(() => String, { nullable: true })
+	@IsString()
+	@IsOptional()
+	public searchTerm?: string;
 }

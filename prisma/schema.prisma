@@ -282,7 +282,7 @@ model Subcategory {
   id String @id @default(uuid())
 
   title    String
-  slug     String @unique
+  slug     String
   position Int
 
   topics Topic[] @relation("subcategory_topics")

@@ -11,6 +11,8 @@ import { TotpModule } from '../modules/auth/totp/totp.module';
 import { VerificationModule } from '../modules/auth/verification/verification.module';
 import { BookmarkModule } from '../modules/content/bookmark/bookmark.module';
 import { CategoryModule } from '../modules/content/category/category.module';
+import { CommentModule } from '../modules/content/comment/comment.module';
+import { ProjectModule } from '../modules/content/project/project.module';
 import { SubcategoryModule } from '../modules/content/subcategory/subcategory.module';
 import { TopicModule } from '../modules/content/topic/topic.module';
 import { CronModule } from '../modules/cron/cron.module';
@@ -58,7 +60,9 @@ import { RedisModule } from './redis/redis.module';
 		SubcategoryModule,
 		BookmarkModule,
 		ViewModule,
-		TopicModule
+		TopicModule,
+		CommentModule,
+		ProjectModule
 	]
 })
 export class CoreModule {}

@@ -3,61 +3,59 @@ import { GraphQLJSON } from 'graphql-scalars';
 
 import { Topic } from '@/prisma/generated';
 import { UserModel } from '@/src/modules/auth/account/models/user.model';
-import { Pagination } from '@/src/shared/models/pagination.model';
 
 import { BookmarkModel } from '../../bookmark/models/bookmark.model';
+import { CommentModel } from '../../comment/models/comment.model';
+import { ProjectModel } from '../../project/models/project.model';
 import { SubcategoryModel } from '../../subcategory/models/subcategory.model';
 
 @ObjectType()
 export class TopicModel implements Topic {
 	@Field(() => ID)
-	id: string;
+	public id: string;
 
 	@Field()
-	title: string;
+	public title: string;
 
 	@Field(() => GraphQLJSON)
-	contentBlocks: Record<string, any> | null;
+	public contentBlocks: Record<string, any> | null;
 
 	@Field()
-	slug: string;
+	public slug: string;
 
-	@Field(() => Int)
-	viewCount: number;
+	@Field(() => Number)
+	public viewCount: number;
 
-	@Field(() => ID)
-	authorId: string;
+	@Field(() => UserModel)
+	public author: UserModel;
 
-	@Field(() => ID)
-	attachedProjectId: string | null;
+	@Field(() => String)
+	public authorId: string;
 
-	@Field(() => ID)
-	subcategoryId: string;
+	@Field(() => SubcategoryModel)
+	public subcategory: SubcategoryModel;
 
-	@Field(() => [UserModel])
-	bookmarks: BookmarkModel;
+	@Field(() => String)
+	public subcategoryId: string;
 
-	@Field()
-	isBookmarked: boolean;
-
-	// @Field(() => [CommentModel])
-	// comments: CommentModel[];
-
-	// @Field(() => ProjectModel, { nullable: true })
-	// attachedProject?: ProjectModel;
+	@Field(() => [BookmarkModel])
+	public bookmarks: BookmarkModel;
 
 	@Field()
-	createdAt: Date;
+	public isBookmarked: boolean;
+
+	@Field(() => [CommentModel])
+	public comments: CommentModel[];
+
+	@Field(() => ProjectModel, { nullable: true })
+	public attachedProject?: ProjectModel;
+
+	@Field(() => String, { nullable: true })
+	public attachedProjectId: string | null;
 
 	@Field()
-	updatedAt: Date;
-}
+	public createdAt: Date;
 
-@ObjectType()
-export class PaginatedTopics {
-	@Field(() => [TopicModel])
-	data: TopicModel[];
-
-	@Field(() => Pagination)
-	pagination: Pagination;
+	@Field()
+	public updatedAt: Date;
 }

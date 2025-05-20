@@ -1,8 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import type { User } from '@/prisma/generated';
+import { RoleType } from '@/prisma/generated';
 import { Authorization } from '@/src/shared/decorators/auth.decorator';
-import { Authorized } from '@/src/shared/decorators/authorized.decorator';
 
 import { CreateSpecializationInput } from './inputs/specialization.input';
 import { SpecializationModel } from './models/specialization.model';
@@ -19,7 +18,7 @@ export class SpecializationResolver {
 		return this.specializationService.findAll();
 	}
 
-	@Authorization()
+	@Authorization(RoleType.ADMIN)
 	@Mutation(() => Boolean, { name: 'createSpecialization' })
 	public async createSpecialization(
 		@Args('data') input: CreateSpecializationInput

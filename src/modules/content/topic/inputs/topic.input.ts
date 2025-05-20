@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { GraphQLJSON } from 'graphql-scalars';
 
 @InputType()
@@ -12,11 +12,12 @@ export class CreateTopicInput {
 	@Field(() => GraphQLJSON)
 	contentBlocks: Record<string, any> | null;
 
-	@Field(() => ID)
+	@Field(() => String)
 	@IsNotEmpty()
 	subcategoryId: string;
 
-	@Field(() => ID, { nullable: true })
+	@Field(() => String, { nullable: true })
+	@IsOptional()
 	attachedProjectId?: string;
 }
 
@@ -28,15 +29,18 @@ export class UpdateTopicInput {
 	id: string;
 
 	@Field({ nullable: true })
+	@IsOptional()
 	@IsString()
 	title?: string;
 
 	@Field(() => GraphQLJSON)
 	contentBlocks: Record<string, any> | null;
 
-	@Field(() => ID, { nullable: true })
+	@Field(() => String, { nullable: true })
+	@IsOptional()
 	subcategoryId?: string;
 
-	@Field(() => ID, { nullable: true })
+	@Field(() => String, { nullable: true })
+	@IsOptional()
 	attachedProjectId?: string;
 }

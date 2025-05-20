@@ -17,8 +17,8 @@ export class CategoryResolver {
 	}
 
 	@Query(() => CategoryModel, { name: 'findOneCategory' })
-	public async category(@Args('id') id: string) {
-		return this.categoryService.findOne(id);
+	public async category(@Args('slug') slug: string) {
+		return this.categoryService.findOne(slug);
 	}
 
 	@Authorization(RoleType.ADMIN)

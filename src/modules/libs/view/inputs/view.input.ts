@@ -1,5 +1,9 @@
-import { Field, ID, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType, registerEnumType } from '@nestjs/graphql';
 import { TargetContentType } from '@prisma/generated';
+
+registerEnumType(TargetContentType, {
+	name: 'TargetContentType'
+});
 
 @InputType()
 export class ViewInput {

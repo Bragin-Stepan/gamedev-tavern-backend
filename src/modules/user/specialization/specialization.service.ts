@@ -4,7 +4,6 @@ import {
 	NotFoundException
 } from '@nestjs/common';
 
-import { User } from '@/prisma/generated';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 
 import { CreateSpecializationInput } from './inputs/specialization.input';
@@ -16,7 +15,7 @@ export class SpecializationService {
 	public async findAll() {
 		return this.prismaService.specialization.findMany({
 			orderBy: {
-				createdAt: 'desc'
+				title: 'asc'
 			}
 		});
 	}

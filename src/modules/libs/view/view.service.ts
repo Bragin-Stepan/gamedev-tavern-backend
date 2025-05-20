@@ -22,11 +22,11 @@ export class ViewService {
 
 	async trackView(
 		viewerId: string | null,
-		input: ViewInput,
+		targetContentType: TargetContentType,
+		targetId: string,
 		req: Request,
 		userAgent: string
 	): Promise<boolean> {
-		const { targetContentType, targetId } = input;
 		await this.verifyContentExists(targetContentType, targetId);
 
 		const metadata = getSessionMetadata(req, userAgent);

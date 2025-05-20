@@ -7,9 +7,9 @@ import {
 	MaxLength
 } from 'class-validator';
 
-import { SpecializationInput } from '../../specialization/inputs/specialization.input';
+import { LinkInput } from '@/src/shared/inputs/link.input';
 
-import { SocialLinkInput } from './social-link.input';
+import { SpecializationInput } from '../../specialization/inputs/specialization.input';
 
 @InputType()
 export class ChangeProfileInfoInput {
@@ -25,8 +25,8 @@ export class ChangeProfileInfoInput {
 	public status?: string;
 
 	@IsOptional()
-	@Field(() => [SocialLinkInput])
-	public socialLinks?: SocialLinkInput[];
+	@Field(() => [LinkInput])
+	public socialLinks?: LinkInput[];
 
 	@Field(() => String)
 	@IsOptional()

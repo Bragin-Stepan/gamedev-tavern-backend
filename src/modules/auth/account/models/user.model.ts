@@ -1,19 +1,22 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
 import type { RoleType, User } from '@/prisma/generated';
 import { BookmarkModel } from '@/src/modules/content/bookmark/models/bookmark.model';
+import { CommentModel } from '@/src/modules/content/comment/models/comment.model';
+import { ProjectModel } from '@/src/modules/content/project/models/project.model';
 import { TopicModel } from '@/src/modules/content/topic/models/topic.model';
 import { ViewModel } from '@/src/modules/libs/view/models/view.model';
 import { CandidateCardModel } from '@/src/modules/user/candidate-card/models/candidate-card.model';
 import { FollowModel } from '@/src/modules/user/follow/models/follow.model';
-import { SocialLinkModel } from '@/src/modules/user/profile/models/social-link.model';
+import { SpecializationModel } from '@/src/modules/user/specialization/models/specialization.model';
+import { LinkModel } from '@/src/shared/models/link.model';
 
 @ObjectType()
 export class UserModel implements User {
 	@Field(() => ID)
 	public id: string;
 
-	@Field(() => Number)
+	@Field(() => Int)
 	public uid: number;
 
 	@Field(() => String)
@@ -64,11 +67,14 @@ export class UserModel implements User {
 	@Field(() => [ViewModel])
 	public views: ViewModel[];
 
+	@Field(() => SpecializationModel, { nullable: true })
+	public specialization: SpecializationModel;
+
 	@Field(() => String)
 	public specializationId: string;
 
-	@Field(() => [SocialLinkModel])
-	public socialLinks: SocialLinkModel[];
+	@Field(() => [LinkModel])
+	public socialLinks: LinkModel[];
 
 	@Field(() => [FollowModel])
 	public followers: FollowModel[];

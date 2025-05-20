@@ -1,6 +1,10 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { TargetContentType, View } from '@prisma/generated';
 
+registerEnumType(TargetContentType, {
+	name: 'TargetContentType'
+});
+
 @ObjectType()
 export class ViewModel implements View {
 	@Field(() => ID)

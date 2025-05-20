@@ -9,21 +9,21 @@ export class CategoryModel implements Category {
 	@Field(() => ID)
 	id: string;
 
-	@Field()
+	@Field(() => String)
 	title: string;
 
-	@Field()
+	@Field(() => String)
 	slug: string;
 
-	@Field()
+	@Field(() => Number)
 	position: number;
 
-	@Field(() => [SubcategoryModel], { nullable: 'items' })
-	subcategories?: SubcategoryModel[];
+	@Field(() => [SubcategoryModel])
+	subcategories: SubcategoryModel[];
 
-	@Field()
+	@Field(() => Date)
 	createdAt: Date;
 
-	@Field()
+	@Field(() => Date)
 	updatedAt: Date;
 }

@@ -3,8 +3,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Subcategory } from '@/prisma/generated';
 
 import { CategoryModel } from '../../category/models/category.model';
-
-// import { TopicModel } from '../topic/topic.model';
+import { TopicModel } from '../../topic/models/topic.model';
 
 @ObjectType()
 export class SubcategoryModel implements Subcategory {
@@ -26,8 +25,8 @@ export class SubcategoryModel implements Subcategory {
 	@Field(() => CategoryModel)
 	category: CategoryModel;
 
-	// @Field(() => [TopicModel], { nullable: 'items' })
-	// topics?: TopicModel[];
+	@Field(() => [TopicModel], { nullable: 'items' })
+	topics?: TopicModel[];
 
 	@Field()
 	createdAt: Date;

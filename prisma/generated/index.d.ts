@@ -20461,18 +20461,18 @@ export namespace Prisma {
 
   export type SubcategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    slug?: string
     AND?: SubcategoryWhereInput | SubcategoryWhereInput[]
     OR?: SubcategoryWhereInput[]
     NOT?: SubcategoryWhereInput | SubcategoryWhereInput[]
     title?: StringFilter<"Subcategory"> | string
+    slug?: StringFilter<"Subcategory"> | string
     position?: IntFilter<"Subcategory"> | number
     categoryId?: StringFilter<"Subcategory"> | string
     createdAt?: DateTimeFilter<"Subcategory"> | Date | string
     updatedAt?: DateTimeFilter<"Subcategory"> | Date | string
     topics?: TopicListRelationFilter
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
-  }, "id" | "slug">
+  }, "id">
 
   export type SubcategoryOrderByWithAggregationInput = {
     id?: SortOrder

@@ -1,14 +1,15 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { TargetContentType, User } from '@prisma/generated';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Prisma, TargetContentType, User } from '@prisma/generated';
+import type { Request } from 'express';
 
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { RedisService } from '@/src/core/redis/redis.service';
 import { PaginationInput } from '@/src/shared/inputs/pagination.input';
+import { generateSlug } from '@/src/shared/utils/generate-slug.util';
 
 import { ViewService } from '../../libs/view/view.service';
 
 import { CreateTopicInput, UpdateTopicInput } from './inputs/topic.input';
-import { PaginatedTopics, TopicModel } from './models/topic.model';
 
 @Injectable()
 export class TopicService {
@@ -21,33 +22,79 @@ export class TopicService {
 		private readonly viewService: ViewService
 	) {}
 
-	async createTopic(id: string, input: CreateTopicInput) {
+	public async findAllTopics(
+		categoryId?: string,
+		subcategoryId?: string,
+		pagination?: PaginationInput
+	) {
+		const { take, skip, searchTerm } = pagination;
+
+		const where: Prisma.TopicWhereInput = {};
+
+		if (subcategoryId) {
+			where.subcategoryId = subcategoryId;
+		} else if (categoryId) {
+			where.subcategory = {
+				categoryId
+			};
+		}
+
+		const topics = await this.prisma.topic.findMany({
+			where,
+			take: take ?? 12,
+			skip: skip ?? 0,
+			orderBy: { createdAt: 'desc' },
+			include: {
+				author: {
+					include: {
+						socialLinks: true
+					}
+				},
+				comments: true,
+				subcategory: {
+					include: { category: true }
+				},
+				_count: {
+					select: { comments: true }
+				}
+			}
+		});
+
+		return topics;
+	}
+
+	public async createTopic(user: User, input: CreateTopicInput) {
 		const { subcategoryId, attachedProjectId, title, contentBlocks } = input;
 
-		const slug = await this.generateUniqueSlug(title);
+		const slug = generateSlug(title);
 
 		await this.prisma.topic.create({
 			data: {
 				title,
 				slug,
 				contentBlocks,
-				authorId: id,
-				subcategoryId: subcategoryId,
-				attachedProjectId: attachedProjectId,
+				author: {
+					connect: { id: user.id }
+				},
+				subcategory: {
+					connect: { id: subcategoryId }
+				},
+				attachedProject: attachedProjectId
+					? { connect: { id: attachedProjectId } }
+					: undefined,
 				isBookmarked: false,
 				viewCount: 0
 			}
 		});
 
-		await this.invalidateCategoryCache(input.subcategoryId);
 		return true;
 	}
 
-	async updateTopic(id: string, input: UpdateTopicInput) {
+	public async updateTopic(id: string, input: UpdateTopicInput) {
 		const data: any = { ...input };
 
 		if (input.title) {
-			data.slug = await this.generateUniqueSlug(input.title, id);
+			data.slug = generateSlug(input.title);
 		}
 
 		const topic = await this.prisma.topic.update({
@@ -55,22 +102,21 @@ export class TopicService {
 			data
 		});
 
-		await this.invalidateTopicCache(id);
-		if (input.subcategoryId) {
-			await this.invalidateCategoryCache(input.subcategoryId);
-		}
+		return true;
+	}
+
+	public async deleteTopic(id: string) {
+		await this.prisma.topic.delete({ where: { id } });
 
 		return true;
 	}
 
-	async deleteTopic(id: string) {
-		const topic = await this.prisma.topic.delete({ where: { id } });
-		await this.invalidateTopicCache(id);
-		await this.invalidateCategoryCache(topic.subcategoryId);
-		return true;
-	}
-
-	async findTopicById(id: string) {
+	public async findTopicById(
+		id: string,
+		user: User | null,
+		req: Request,
+		userAgent: string
+	) {
 		const cacheKey = `${this.cacheKeyPrefix}${id}`;
 
 		try {
@@ -97,228 +143,45 @@ export class TopicService {
 						orderBy: { createdAt: 'desc' },
 						take: 5,
 						include: {
-							author: {
-								select: {
-									id: true,
-									username: true,
-									avatar: true
-								}
-							}
+							author: true
 						}
 					},
-					attachedProject: {
-						select: {
-							id: true,
-							title: true,
-							slug: true
-						}
-					}
+					attachedProject: true
 				}
 			});
-
-			if (!topic) throw new Error('Topic not found');
+			if (!topic) throw new NotFoundException('Тема не найдена');
 
 			await this.redis.set(cacheKey, JSON.stringify(topic), 'EX', 3600);
+
+			await this.viewService.trackView(
+				user.id,
+				TargetContentType.TOPIC,
+				id,
+				req,
+				userAgent
+			);
+
 			return topic;
 		} catch (error) {
-			this.logger.error(`Error finding topic: ${error.message}`);
+			this.logger.error(`Ошибка при поиске темы: ${error.message}`);
 			throw error;
 		}
 	}
 
-	async findTopicsBySubcategory(
-		subcategoryId: string,
-		pagination: PaginationInput
-	) {
-		const cacheKey = `${this.cacheKeyPrefix}subcategory:${subcategoryId}:${pagination.page}:${pagination.limit}`;
+	async topicsByAuthor(authorId: string, pagination?: PaginationInput) {
+		const { take, skip, searchTerm } = pagination;
 
-		try {
-			const cached = await this.redis.get(cacheKey);
-			if (cached) return JSON.parse(cached);
-
-			const [topics, total] = await Promise.all([
-				this.prisma.topic.findMany({
-					where: { subcategoryId },
-					skip: (pagination.page - 1) * pagination.limit,
-					take: pagination.limit,
-					orderBy: { createdAt: 'desc' },
-					include: {
-						author: {
-							select: {
-								id: true,
-								username: true,
-								avatar: true
-							}
-						},
-						_count: {
-							select: { comments: true }
-						}
-					}
-				}),
-				this.prisma.topic.count({ where: { subcategoryId } })
-			]);
-
-			const result = {
-				data: topics,
-				pagination: {
-					...pagination,
-					total,
-					totalPages: Math.ceil(total / pagination.limit)
-				}
-			};
-
-			await this.redis.set(cacheKey, JSON.stringify(result), 'EX', 300);
-			return result;
-		} catch (error) {
-			this.logger.error(`Error finding topics: ${error.message}`);
-			throw error;
-		}
-	}
-
-	async findPopularTopics(limit = 10) {
-		const cacheKey = `${this.cacheKeyPrefix}popular:${limit}`;
-
-		try {
-			const cached = await this.redis.get(cacheKey);
-			if (cached) return JSON.parse(cached);
-
-			const topics = await this.prisma.topic.findMany({
-				take: limit,
-				orderBy: [{ viewCount: 'desc' }, { createdAt: 'desc' }],
-				include: {
-					author: {
-						select: {
-							id: true,
-							username: true,
-							avatar: true
-						}
-					},
-					_count: {
-						select: { comments: true }
-					}
-				}
-			});
-
-			await this.redis.set(cacheKey, JSON.stringify(topics), 'EX', 600);
-			return topics;
-		} catch (error) {
-			this.logger.error(`Error finding popular topics: ${error.message}`);
-			throw error;
-		}
-	}
-
-	async trackTopicView(topicId: string, viewerId: string | null, ip: string) {
-		await this.prisma.$transaction([
-			this.prisma.view.upsert({
-				where: {
-					viewerId_targetContentType_targetId: {
-						viewerId: viewerId || '',
-						targetContentType: TargetContentType.TOPIC,
-						targetId: topicId
-					}
-				},
-				create: {
-					viewerId,
-					ip,
-					targetContentType: TargetContentType.TOPIC,
-					targetId: topicId
-				},
-				update: {
-					updatedAt: new Date()
-				}
-			}),
-			this.prisma.topic.update({
-				where: { id: topicId },
-				data: { viewCount: { increment: 1 } }
-			})
-		]);
-
-		await this.invalidateTopicCache(topicId);
-	}
-
-	async toggleBookmark(userId: string, topicId: string) {
-		const existing = await this.prisma.bookmark.findUnique({
-			where: {
-				userId_targetContentType_targetId: {
-					userId,
-					targetContentType: TargetContentType.TOPIC,
-					targetId: topicId
+		const topics = await this.prisma.topic.findMany({
+			where: { authorId: authorId },
+			orderBy: { createdAt: 'desc' },
+			take,
+			skip,
+			include: {
+				author: true,
+				subcategory: {
+					include: { category: true }
 				}
 			}
 		});
-
-		if (existing) {
-			await this.prisma.$transaction([
-				this.prisma.bookmark.delete({
-					where: {
-						userId_targetContentType_targetId: {
-							userId,
-							targetContentType: TargetContentType.TOPIC,
-							targetId: topicId
-						}
-					}
-				}),
-				this.prisma.topic.update({
-					where: { id: topicId },
-					data: { isBookmarked: false }
-				})
-			]);
-			return false;
-		} else {
-			await this.prisma.$transaction([
-				this.prisma.bookmark.create({
-					data: {
-						userId,
-						targetContentType: TargetContentType.TOPIC,
-						targetId: topicId
-					}
-				}),
-				this.prisma.topic.update({
-					where: { id: topicId },
-					data: { isBookmarked: true }
-				})
-			]);
-			return true;
-		}
-	}
-
-	private async generateUniqueSlug(title: string, excludeId?: string) {
-		let slug = title
-			.toLowerCase()
-			.replace(/[^\w\s-]/g, '')
-			.replace(/[\s_-]+/g, '-')
-			.replace(/^-+|-+$/g, '');
-
-		let existing = await this.prisma.topic.findFirst({
-			where: {
-				slug,
-				NOT: { id: excludeId }
-			}
-		});
-
-		if (existing) {
-			const randomSuffix = Math.floor(Math.random() * 10000);
-			slug = `${slug}-${randomSuffix}`;
-		}
-
-		return slug;
-	}
-
-	private async invalidateTopicCache(topicId: string) {
-		await this.redis.del(`${this.cacheKeyPrefix}${topicId}`);
-		const keys = await this.redis.keys(`${this.cacheKeyPrefix}*`);
-		if (keys.length > 0) {
-			await this.redis.del(...keys);
-		}
-	}
-
-	private async invalidateCategoryCache(subcategoryId: string) {
-		const keys = await this.redis.keys(
-			`${this.cacheKeyPrefix}subcategory:${subcategoryId}:*`
-		);
-		if (keys.length > 0) {
-			await this.redis.del(...keys);
-		}
-		await this.redis.del(`${this.cacheKeyPrefix}popular:*`);
 	}
 }

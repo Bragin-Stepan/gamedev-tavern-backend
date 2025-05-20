@@ -1,18 +1,31 @@
 import { Field, ID, InputType, PartialType } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class CategoryInput {
-	@Field()
-	@IsString()
-	@IsNotEmpty()
+	@Field({
+		description: 'Заголовок категории'
+	})
+	@IsString({
+		message: 'Заголовок должен быть строкой'
+	})
+	@IsNotEmpty({
+		message: 'Заголовок не может быть пустым'
+	})
 	title: string;
 
-	@Field()
-	@IsString()
-	@IsNotEmpty()
+	@Field({
+		description: 'Slug категории'
+	})
+	@IsString({
+		message: 'Slug должен быть строкой'
+	})
+	@IsNotEmpty({
+		message: 'Slug не может быть пустым'
+	})
 	slug: string;
 
-	@Field({ nullable: true, defaultValue: 0 })
+	@Field(() => Number, { nullable: true, defaultValue: 0 })
+	@IsOptional()
 	position?: number;
 }
