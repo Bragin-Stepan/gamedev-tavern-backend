@@ -252,6 +252,13 @@ input PaginationInput {
   take: Int
 }
 
+enum PathCareerType {
+  ART
+  DEVELOPER
+  MANAGER
+  OTHER
+}
+
 type ProjectModel {
   author: UserModel!
   comments: [CommentModel!]!
@@ -285,7 +292,7 @@ type Query {
   findPopularProjects(limit: Float! = 10): [ProjectModel!]!
   findPopularSubcategories(pagination: PaginationInput!): [SubcategoryModel!]!
   findProfile: UserModel!
-  findProfileByUid(uid: Float!): UserModel!
+  findProfileByUid(uid: Int!): UserModel!
   findProjectById(id: String!): ProjectModel!
   findProjectBySlug(slug: String!): ProjectModel
   findProjectsByAuthor(authorId: String!, pagination: PaginationInput!): PaginatedProjects!
@@ -298,6 +305,12 @@ type Query {
 
 input ResetPasswordInput {
   email: String!
+}
+
+enum RoleType {
+  ADMIN
+  MODERATOR
+  USER
 }
 
 type SessionMetadataModel {
@@ -318,7 +331,7 @@ input SpecializationInput {
 }
 
 type SpecializationModel {
-  careerPath: String!
+  careerPath: PathCareerType!
   createdAt: DateTime!
   id: ID!
   title: String!
@@ -419,7 +432,7 @@ type UserModel {
   isVerified: Boolean!
   password: String!
   projects: [ProjectModel!]!
-  role: String!
+  role: RoleType!
   socialLinks: [LinkModel!]!
   specialization: SpecializationModel
   specializationId: String!

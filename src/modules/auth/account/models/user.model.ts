@@ -1,6 +1,6 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import type { RoleType, User } from '@/prisma/generated';
+import { RoleType, User } from '@/prisma/generated';
 import { BookmarkModel } from '@/src/modules/content/bookmark/models/bookmark.model';
 import { CommentModel } from '@/src/modules/content/comment/models/comment.model';
 import { ProjectModel } from '@/src/modules/content/project/models/project.model';
@@ -10,6 +10,10 @@ import { CandidateCardModel } from '@/src/modules/user/candidate-card/models/can
 import { FollowModel } from '@/src/modules/user/follow/models/follow.model';
 import { SpecializationModel } from '@/src/modules/user/specialization/models/specialization.model';
 import { LinkModel } from '@/src/shared/models/link.model';
+
+registerEnumType(RoleType, {
+	name: 'RoleType'
+});
 
 @ObjectType()
 export class UserModel implements User {
@@ -25,7 +29,7 @@ export class UserModel implements User {
 	@Field(() => String)
 	public password: string;
 
-	@Field(() => String)
+	@Field(() => RoleType)
 	public role: RoleType;
 
 	@Field(() => String, { nullable: true })

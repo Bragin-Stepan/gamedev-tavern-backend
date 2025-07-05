@@ -1,6 +1,10 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import type { PathCareerType, Specialization } from '@/prisma/generated';
+import { PathCareerType, Specialization } from '@/prisma/generated';
+
+registerEnumType(PathCareerType, {
+	name: 'PathCareerType'
+});
 
 @ObjectType()
 export class SpecializationModel implements Specialization {
@@ -10,7 +14,7 @@ export class SpecializationModel implements Specialization {
 	@Field(() => String)
 	public title: string;
 
-	@Field(() => String)
+	@Field(() => PathCareerType)
 	public careerPath: PathCareerType;
 
 	@Field(() => Date)

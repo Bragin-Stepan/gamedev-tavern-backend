@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import * as GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import * as Upload from 'graphql-upload/Upload.js';
 
@@ -17,7 +17,7 @@ export class ProfileResolver {
 	public constructor(private readonly profileService: ProfileService) {}
 
 	@Query(() => UserModel, { name: 'findProfileByUid' })
-	public async findByUid(@Args('uid') uid: number) {
+	public async findByUid(@Args('uid', { type: () => Int }) uid: number) {
 		return this.profileService.findByUid(uid);
 	}
 

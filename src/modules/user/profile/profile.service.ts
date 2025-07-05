@@ -1,6 +1,5 @@
 import {
 	BadRequestException,
-	ConflictException,
 	Injectable,
 	NotFoundException
 } from '@nestjs/common';
@@ -23,13 +22,10 @@ export class ProfileService {
 
 	public async findByUid(uid: number) {
 		const user = await this.prismaService.user.findUnique({
-			where: { uid, isDeactivated: false },
+			where: { uid: uid, isDeactivated: false },
 			include: {
-				socialLinks: {
-					orderBy: {
-						position: 'asc'
-					}
-				}
+				socialLinks: true,
+				specialization: true
 			}
 		});
 
