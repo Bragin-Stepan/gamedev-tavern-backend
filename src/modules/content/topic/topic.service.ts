@@ -133,14 +133,12 @@ export class TopicService {
 							category: true
 						}
 					},
-					// comments: {
-					// 	orderBy: { createdAt: 'desc' },
-					// 	take: 5,
-					// 	include: {
-					// 		author: true
-					// 	}
-					// },
-					attachedProject: true
+					attachedProject: true,
+					_count: {
+						select: {
+							comments: true
+						}
+					}
 				}
 			});
 			if (!topic) throw new NotFoundException('Публикация не найдена');
@@ -155,7 +153,10 @@ export class TopicService {
 				);
 			}
 
-			return topic;
+			return {
+				...topic,
+				commentsCount: topic._count.comments ?? 0
+			};
 		} catch (error) {
 			this.logger.error(`Ошибка при поиске публикации: ${error.message}`);
 			throw error;

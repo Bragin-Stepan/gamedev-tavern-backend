@@ -26,6 +26,9 @@ export class TopicModel implements Topic {
 	@Field(() => Number)
 	public viewCount: number;
 
+	@Field(() => Number, { nullable: true })
+	public commentsCount: number;
+
 	@Field(() => UserModel)
 	public author: UserModel;
 

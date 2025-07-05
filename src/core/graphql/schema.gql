@@ -370,6 +370,7 @@ type TopicModel {
   authorId: String!
   bookmarks: [BookmarkModel!]!
   comments: [CommentModel!]!
+  commentsCount: Float
   contentBlocks: JSON!
   createdAt: DateTime!
   id: ID!
