@@ -298,9 +298,9 @@ type Query {
   findProjectsByAuthor(authorId: String!, pagination: PaginationInput!): PaginatedProjects!
   findSessionsByUser: [SessionModel!]!
   findSubcategoriesByCategory(slug: String!): [SubcategoryModel!]!
+  findTopicBySlug(slug: String!): TopicModel
   findTopicsByAuthor(authorId: String!, pagination: PaginationInput!): [TopicModel!]!
   generateTotpSecret: TotpModel!
-  topicById(id: String!): TopicModel!
 }
 
 input ResetPasswordInput {

@@ -111,27 +111,21 @@ export class TopicService {
 		return true;
 	}
 
-	public async findTopicById(
-		id: string,
+	public async findTopicBySlug(
+		slug: string,
 		user: User | null,
 		req: Request,
 		userAgent: string
 	) {
-		const cacheKey = `${this.cacheKeyPrefix}${id}`;
-
 		try {
-			const cached = await this.redis.get(cacheKey);
-			if (cached) return JSON.parse(cached);
-
 			const topic = await this.prisma.topic.findUnique({
-				where: { id },
+				where: { slug },
 				include: {
 					author: {
-						select: {
-							id: true,
-							username: true,
-							avatar: true,
-							specialization: true
+						include: {
+							socialLinks: true,
+							specialization: true,
+							candidateCard: true
 						}
 					},
 					subcategory: {
@@ -139,31 +133,31 @@ export class TopicService {
 							category: true
 						}
 					},
-					comments: {
-						orderBy: { createdAt: 'desc' },
-						take: 5,
-						include: {
-							author: true
-						}
-					},
+					// comments: {
+					// 	orderBy: { createdAt: 'desc' },
+					// 	take: 5,
+					// 	include: {
+					// 		author: true
+					// 	}
+					// },
 					attachedProject: true
 				}
 			});
-			if (!topic) throw new NotFoundException('Тема не найдена');
+			if (!topic) throw new NotFoundException('Публикация не найдена');
 
-			await this.redis.set(cacheKey, JSON.stringify(topic), 'EX', 3600);
-
-			await this.viewService.trackView(
-				user.id,
-				TargetContentType.TOPIC,
-				id,
-				req,
-				userAgent
-			);
+			if (user) {
+				await this.viewService.trackView(
+					user.id,
+					TargetContentType.TOPIC,
+					topic.id,
+					req,
+					userAgent
+				);
+			}
 
 			return topic;
 		} catch (error) {
-			this.logger.error(`Ошибка при поиске темы: ${error.message}`);
+			this.logger.error(`Ошибка при поиске публикации: ${error.message}`);
 			throw error;
 		}
 	}

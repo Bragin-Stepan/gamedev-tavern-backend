@@ -39,14 +39,14 @@ export class TopicResolver {
 		return this.topicService.deleteTopic(id);
 	}
 
-	@Query(() => TopicModel, { name: 'topicById' })
+	@Query(() => TopicModel, { nullable: true, name: 'findTopicBySlug' })
 	public async topic(
-		@Args('id') id: string,
+		@Args('slug') slug: string,
 		@Context() { req }: GqlContext,
 		@UserAgent() userAgent: string,
 		@Authorized() user: User
 	) {
-		return this.topicService.findTopicById(id, user, req, userAgent);
+		return this.topicService.findTopicBySlug(slug, user, req, userAgent);
 	}
 
 	@Query(() => [TopicModel], { name: 'findAllTopics' })
