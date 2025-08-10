@@ -26,6 +26,7 @@ export class ProjectService {
 				slug,
 				images: input.images,
 				genres: input.genres,
+				engine: input.engine,
 				description: input.description,
 				isGathering: input.isGathering,
 				authorId,

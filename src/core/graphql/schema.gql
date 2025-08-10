@@ -97,6 +97,7 @@ input CreateCommentInput {
 
 input CreateProjectInput {
   description: String!
+  engine: String
   genres: [String!]!
   images: [String!]!
   isGathering: Boolean! = false
@@ -264,6 +265,7 @@ type ProjectModel {
   comments: [CommentModel!]!
   createdAt: DateTime!
   description: String!
+  engine: String
   genres: [String!]!
   id: ID!
   images: [String!]!
@@ -298,7 +300,7 @@ type Query {
   findProjectsByAuthor(authorId: String!, pagination: PaginationInput!): PaginatedProjects!
   findSessionsByUser: [SessionModel!]!
   findSubcategoriesByCategory(slug: String!): [SubcategoryModel!]!
-  findTopicBySlug(slug: String!): TopicModel
+  findTopicBySlug(slug: String!): TopicModel!
   findTopicsByAuthor(authorId: String!, pagination: PaginationInput!): [TopicModel!]!
   generateTotpSecret: TotpModel!
 }

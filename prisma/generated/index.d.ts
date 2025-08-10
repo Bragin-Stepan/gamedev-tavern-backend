@@ -5200,6 +5200,7 @@ export namespace Prisma {
   export type ProjectMinAggregateOutputType = {
     id: string | null
     title: string | null
+    engine: string | null
     description: string | null
     authorId: string | null
     isBookmarked: boolean | null
@@ -5213,6 +5214,7 @@ export namespace Prisma {
   export type ProjectMaxAggregateOutputType = {
     id: string | null
     title: string | null
+    engine: string | null
     description: string | null
     authorId: string | null
     isBookmarked: boolean | null
@@ -5228,6 +5230,7 @@ export namespace Prisma {
     title: number
     images: number
     genres: number
+    engine: number
     description: number
     contentBlocks: number
     authorId: number
@@ -5252,6 +5255,7 @@ export namespace Prisma {
   export type ProjectMinAggregateInputType = {
     id?: true
     title?: true
+    engine?: true
     description?: true
     authorId?: true
     isBookmarked?: true
@@ -5265,6 +5269,7 @@ export namespace Prisma {
   export type ProjectMaxAggregateInputType = {
     id?: true
     title?: true
+    engine?: true
     description?: true
     authorId?: true
     isBookmarked?: true
@@ -5280,6 +5285,7 @@ export namespace Prisma {
     title?: true
     images?: true
     genres?: true
+    engine?: true
     description?: true
     contentBlocks?: true
     authorId?: true
@@ -5383,6 +5389,7 @@ export namespace Prisma {
     title: string
     images: string[]
     genres: string[]
+    engine: string
     description: string
     contentBlocks: JsonValue | null
     authorId: string
@@ -5418,6 +5425,7 @@ export namespace Prisma {
     title?: boolean
     images?: boolean
     genres?: boolean
+    engine?: boolean
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
@@ -5441,6 +5449,7 @@ export namespace Prisma {
     title?: boolean
     images?: boolean
     genres?: boolean
+    engine?: boolean
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
@@ -5458,6 +5467,7 @@ export namespace Prisma {
     title?: boolean
     images?: boolean
     genres?: boolean
+    engine?: boolean
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
@@ -5475,6 +5485,7 @@ export namespace Prisma {
     title?: boolean
     images?: boolean
     genres?: boolean
+    engine?: boolean
     description?: boolean
     contentBlocks?: boolean
     authorId?: boolean
@@ -5486,7 +5497,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "images" | "genres" | "description" | "contentBlocks" | "authorId" | "isBookmarked" | "viewCount" | "isGathering" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "images" | "genres" | "engine" | "description" | "contentBlocks" | "authorId" | "isBookmarked" | "viewCount" | "isGathering" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     topics?: boolean | Project$topicsArgs<ExtArgs>
@@ -5518,6 +5529,7 @@ export namespace Prisma {
       title: string
       images: string[]
       genres: string[]
+      engine: string
       description: string
       contentBlocks: Prisma.JsonValue | null
       authorId: string
@@ -5960,6 +5972,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Project", 'String'>
     readonly images: FieldRef<"Project", 'String[]'>
     readonly genres: FieldRef<"Project", 'String[]'>
+    readonly engine: FieldRef<"Project", 'String'>
     readonly description: FieldRef<"Project", 'String'>
     readonly contentBlocks: FieldRef<"Project", 'Json'>
     readonly authorId: FieldRef<"Project", 'String'>
@@ -19100,6 +19113,7 @@ export namespace Prisma {
     title: 'title',
     images: 'images',
     genres: 'genres',
+    engine: 'engine',
     description: 'description',
     contentBlocks: 'contentBlocks',
     authorId: 'authorId',
@@ -19695,6 +19709,7 @@ export namespace Prisma {
     title?: StringFilter<"Project"> | string
     images?: StringNullableListFilter<"Project">
     genres?: StringNullableListFilter<"Project">
+    engine?: StringFilter<"Project"> | string
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
@@ -19717,6 +19732,7 @@ export namespace Prisma {
     title?: SortOrder
     images?: SortOrder
     genres?: SortOrder
+    engine?: SortOrder
     description?: SortOrder
     contentBlocks?: SortOrderInput | SortOrder
     authorId?: SortOrder
@@ -19743,6 +19759,7 @@ export namespace Prisma {
     title?: StringFilter<"Project"> | string
     images?: StringNullableListFilter<"Project">
     genres?: StringNullableListFilter<"Project">
+    engine?: StringFilter<"Project"> | string
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
@@ -19764,6 +19781,7 @@ export namespace Prisma {
     title?: SortOrder
     images?: SortOrder
     genres?: SortOrder
+    engine?: SortOrder
     description?: SortOrder
     contentBlocks?: SortOrderInput | SortOrder
     authorId?: SortOrder
@@ -19788,6 +19806,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Project"> | string
     images?: StringNullableListFilter<"Project">
     genres?: StringNullableListFilter<"Project">
+    engine?: StringWithAggregatesFilter<"Project"> | string
     description?: StringWithAggregatesFilter<"Project"> | string
     contentBlocks?: JsonNullableWithAggregatesFilter<"Project">
     authorId?: StringWithAggregatesFilter<"Project"> | string
@@ -20860,6 +20879,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -20881,6 +20901,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -20902,6 +20923,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -20923,6 +20945,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -20944,6 +20967,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -20960,6 +20984,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -20975,6 +21000,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -22224,6 +22250,7 @@ export namespace Prisma {
     title?: SortOrder
     images?: SortOrder
     genres?: SortOrder
+    engine?: SortOrder
     description?: SortOrder
     contentBlocks?: SortOrder
     authorId?: SortOrder
@@ -22242,6 +22269,7 @@ export namespace Prisma {
   export type ProjectMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    engine?: SortOrder
     description?: SortOrder
     authorId?: SortOrder
     isBookmarked?: SortOrder
@@ -22255,6 +22283,7 @@ export namespace Prisma {
   export type ProjectMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    engine?: SortOrder
     description?: SortOrder
     authorId?: SortOrder
     isBookmarked?: SortOrder
@@ -24498,6 +24527,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -24518,6 +24548,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -24862,6 +24893,7 @@ export namespace Prisma {
     title?: StringFilter<"Project"> | string
     images?: StringNullableListFilter<"Project">
     genres?: StringNullableListFilter<"Project">
+    engine?: StringFilter<"Project"> | string
     description?: StringFilter<"Project"> | string
     contentBlocks?: JsonNullableFilter<"Project">
     authorId?: StringFilter<"Project"> | string
@@ -25687,6 +25719,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -25707,6 +25740,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -25883,6 +25917,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -25903,6 +25938,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -26154,6 +26190,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -26174,6 +26211,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -26369,6 +26407,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -26389,6 +26428,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -26519,6 +26559,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -26539,6 +26580,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -26684,6 +26726,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -26704,6 +26747,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -26834,6 +26878,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -26854,6 +26899,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -26999,6 +27045,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -27019,6 +27066,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -27082,6 +27130,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -27102,6 +27151,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId: string
@@ -27138,6 +27188,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -27158,6 +27209,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     authorId?: StringFieldUpdateOperationsInput | string
@@ -28034,6 +28086,7 @@ export namespace Prisma {
     title: string
     images?: ProjectCreateimagesInput | string[]
     genres?: ProjectCreategenresInput | string[]
+    engine: string
     description: string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: boolean
@@ -28157,6 +28210,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -28177,6 +28231,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean
@@ -28197,6 +28252,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     images?: ProjectUpdateimagesInput | string[]
     genres?: ProjectUpdategenresInput | string[]
+    engine?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     contentBlocks?: NullableJsonNullValueInput | InputJsonValue
     isBookmarked?: BoolFieldUpdateOperationsInput | boolean

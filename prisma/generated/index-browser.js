@@ -161,6 +161,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   title: 'title',
   images: 'images',
   genres: 'genres',
+  engine: 'engine',
   description: 'description',
   contentBlocks: 'contentBlocks',
   authorId: 'authorId',

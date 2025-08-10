@@ -113,7 +113,7 @@ export class TopicService {
 
 	public async findTopicBySlug(
 		slug: string,
-		user: User | null,
+		// user: User | null,
 		req: Request,
 		userAgent: string
 	) {
@@ -137,25 +137,27 @@ export class TopicService {
 					_count: {
 						select: {
 							comments: true
+							// views: true
 						}
 					}
 				}
 			});
-			if (!topic) throw new NotFoundException('Публикация не найдена');
 
-			if (user) {
-				await this.viewService.trackView(
-					user.id,
-					TargetContentType.TOPIC,
-					topic.id,
-					req,
-					userAgent
-				);
-			}
+			// console.log('user => ', user);
+
+			// if (userId) {
+			// 	await this.viewService.trackView(
+			// 		userId,
+			// 		TargetContentType.TOPIC,
+			// 		topic.id,
+			// 		req,
+			// 		userAgent
+			// 	);
+			// }
 
 			return {
 				...topic,
-				commentsCount: topic._count.comments ?? 0
+				commentsCount: topic?._count.comments ?? 0
 			};
 		} catch (error) {
 			this.logger.error(`Ошибка при поиске публикации: ${error.message}`);

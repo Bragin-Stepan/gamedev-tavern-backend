@@ -80,6 +80,7 @@ model Project {
   title         String
   images        String[]
   genres        String[]
+  engine        String
   description   String
   contentBlocks Json?    @map("content_blocks")
 

@@ -20,6 +20,9 @@ export class ProjectModel {
 	@Field(() => [String])
 	genres: string[];
 
+	@Field(() => String, { nullable: true })
+	engine: string;
+
 	@Field()
 	description: string;
 
